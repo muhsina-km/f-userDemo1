@@ -1,37 +1,47 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Row, Col, Typography } from 'antd';
+import { Form, Input, Button, Row, Col, Typography, message } from 'antd';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 const { Text } = Typography
 const SignupPage = () => {
 
     const [name, setName] = useState()
+    const [messageApi, contextHolder] = message.useMessage();
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
+    const [error, setError] = useState()
     const navigate = useNavigate()
 
     const onFinish = async (values) => {
         console.log('Received values:', values);
-        // Perform registration logic here
+    
         try {
             const result = await axios.post('http://localhost:3005/register', {
-              name: values.name,
-              email: values.email,
-              password: values.password,
+                name: values.name,
+                email: values.email,
+                password: values.password,
             });
-        
+    
             console.log(result);
-
-            if(result.data.success) {
+    
+            if (result.status === 201) {
                 navigate('/login');
             } else {
-                alert("This email is already registered. Please login to your account");
+                messageApi.open({
+                    type: 'error',
+                    content: 'this email is already registered',
+                });
             }
-            
-          } catch (err) {
+        } catch (err) {
+            messageApi.open({
+                type: 'error',
+                content: 'Something went wrong',
+            });
             console.log(err);
-          }
         }
+    }
+    
+      
 
     // const handleSubmit = (e) => {
     //     e.preventDefault()
@@ -45,6 +55,8 @@ const SignupPage = () => {
 
     return (
         <div>
+            
+        {/* {error && <Text type="danger">{error}</Text>} */}
             <Row justify="center" align="middle" style={{ minHeight: '100vh' }}>
                 <Col span={8}>
                     <center><h1>Signup</h1></center>
@@ -95,6 +107,7 @@ const SignupPage = () => {
                     </div>
                 </Col>
             </Row>
+            {contextHolder}
         </div>
     );
 };

@@ -1,45 +1,33 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Row, Col } from 'antd';
+import { Form, Input, Button, Row, Col, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const LoginPage = () => {
-
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState()
-    const [error, setError] = useState()
-    const navigate = useNavigate()
-
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const [messageApi, contextHolder] = message.useMessage();
+  
   const onFinish = (values) => {
-    console.log('Received values:', values);
-    // Perform login logic here
-    const {email,password } = values;
-    axios.post('http://localhost:3005/login', {email, password})
-    .then(result => {
-        console.log(result)
-        if(result.data === "Success") {
-            navigate('/home')
+    const { email, password } = values;
+    axios.post('http://localhost:3005/login', { email, password })
+      .then(result => {
+        if (result.data === "Success") {
+          navigate('/home');
         } else {
-         setError('Enter valid email or password')
+          messageApi.open({
+            type: 'error',
+            content: 'Invalid email or password',
+          });
         }
-    })
-    .catch(err => console.log(err))
+      })
+      .catch(err => console.log(err));
   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault()
-//     axios.post('http://localhost:3005/login', {email, password})
-//     .then(result => {
-//         console.log(result)
-//         if(result.data === "Success") {
-//             navigate('/home')
-//         }
-//     })
-//     .catch(err => console.log(err))
-//   }
 
   return (
     <Row justify="center" align="middle" style={{ minHeight: '100vh' }}>
+      {contextHolder}
       <Col span={8}>
         <center><h1>Login</h1></center>
         <Form
@@ -53,7 +41,6 @@ const LoginPage = () => {
             label="Email"
             name="email"
             rules={[
-              { required: true, message: 'Please input your email!' },
               { type: 'email', message: 'Please enter a valid email address!' },
             ]}
           >
@@ -69,11 +56,10 @@ const LoginPage = () => {
           </Form.Item>
 
           <Form.Item wrapperCol={{ offset: 12, span: 18 }}>
-            <Button type="primary" htmlType="submit"> 
+            <Button type="primary" htmlType="submit">
               Login
             </Button>
           </Form.Item>
-          <p>{error && <div style={{ color: 'red', textAlign:'center' }}>{error}</div>}</p>
         </Form>
       </Col>
     </Row>
