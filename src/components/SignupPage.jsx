@@ -16,7 +16,7 @@ const SignupPage = () => {
         console.log('Received values:', values);
     
         try {
-            const result = await axios.post('http://localhost:3005/register', {
+            const result = await axios.post('http://localhost:4005/register/register', {
                 name: values.name,
                 email: values.email,
                 password: values.password,
@@ -35,28 +35,14 @@ const SignupPage = () => {
         } catch (err) {
             messageApi.open({
                 type: 'error',
-                content: 'Something went wrong',
+                content: 'this email is already registered',
             });
             console.log(err);
         }
     }
     
-      
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault()
-    //     axios.post('http://localhost:3005/register', { name, email, password })
-    //         .then(result => {
-    //             console.log(result)
-    //             navigate('/login')
-    //         })
-    //         .catch(err => console.log(err))
-    // }
-
     return (
         <div>
-            
-        {/* {error && <Text type="danger">{error}</Text>} */}
             <Row justify="center" align="middle" style={{ minHeight: '100vh' }}>
                 <Col span={8}>
                     <center><h1>Signup</h1></center>

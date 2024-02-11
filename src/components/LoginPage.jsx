@@ -11,10 +11,10 @@ const LoginPage = () => {
   
   const onFinish = (values) => {
     const { email, password } = values;
-    axios.post('http://localhost:3005/login', { email, password })
+    axios.post('http://localhost:4005/register/login', { email, password })
       .then(result => {
         if (result.data === "Success") {
-          navigate('/home');
+          navigate('/home')
         } else {
           messageApi.open({
             type: 'error',
@@ -27,7 +27,7 @@ const LoginPage = () => {
 
   return (
     <Row justify="center" align="middle" style={{ minHeight: '100vh' }}>
-      {contextHolder}
+       {contextHolder}
       <Col span={8}>
         <center><h1>Login</h1></center>
         <Form
@@ -41,6 +41,7 @@ const LoginPage = () => {
             label="Email"
             name="email"
             rules={[
+              { required: true, message: 'Please input your email!' },
               { type: 'email', message: 'Please enter a valid email address!' },
             ]}
           >
@@ -56,7 +57,7 @@ const LoginPage = () => {
           </Form.Item>
 
           <Form.Item wrapperCol={{ offset: 12, span: 18 }}>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit"> 
               Login
             </Button>
           </Form.Item>
