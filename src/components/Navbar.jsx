@@ -14,23 +14,24 @@ const Navbar = () => {
       <AppBar position="fixed" sx={{ backgroundColor: '#FFFFFF' }}> 
         <Toolbar>
           <LocalFloristIcon sx={{
-            fontSize:25, color:'#000000'}}/> &nbsp;
+            fontSize:26, color:'#000000'}}/> &nbsp;
           <Typography
-            variant="h5"
+            variant='h6'
             component="div"
             sx={{
               flexGrow: 1,
               fontFamily: 'Cursive',
-              color: '#000000'
+              color: '#000000',
+              fontSize: '26px',
             }}
           >
             <b>BloomingBuds</b>
           </Typography>
 
           <Box sx={{ flexGrow: 10, display: 'flex', justifyContent: 'center', gap: '18px', color:'#000000' }}>
-            <Typography>HOME</Typography>
-            <Typography>SHOP</Typography>
-            <Typography>ABOUT</Typography>
+            <Typography style={{fontSize:'14px'}}>HOME</Typography>
+            <Typography style={{fontSize:'14px'}}>SHOP</Typography>
+            <Typography style={{fontSize:'14px'}}>ABOUT</Typography>
           </Box>
 
           <Button component={Link} to="/login"

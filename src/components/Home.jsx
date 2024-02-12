@@ -35,7 +35,7 @@ const Home = () => {
             cover={<img alt="plant" src={Plantdetailsview.plantphoto} style={{ height: '150px', objectFit: 'cover' }} />}
           >
             <Meta title={Plantdetailsview.plantname} />
-            <Meta title={`₹${Plantdetailsview.price}`}  description={Plantdetailsview.description} />
+            <Meta title={`₹${Plantdetailsview.price}`}  description={Plantdetailsview.size} />
             <Button type="primary" style={{ marginTop: '8px' }}>Product Details</Button>
           </Card>
         ))}
