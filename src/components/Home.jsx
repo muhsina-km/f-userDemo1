@@ -6,10 +6,11 @@ import axios from 'axios'
 import baseurl from '../Api'
 import { Card, Button } from 'antd';
 import Meta from 'antd/es/card/Meta'
+import { Link } from 'react-router-dom'
 
 const Home = () => {
 
-  var [Plantdetailsview, setPlantdetailsview] = useState([]);
+  const [Plantdetailsview, setPlantdetailsview] = useState([]);
   const [trigger, setTrigger] = useState(false);
     
   useEffect(() => {
@@ -36,7 +37,9 @@ const Home = () => {
           >
             <Meta title={Plantdetailsview.plantname} />
             <Meta title={`₹${Plantdetailsview.price}`}  description={Plantdetailsview.size} />
-            <Button type="primary" style={{ marginTop: '8px' }}>Product Details</Button>
+            <Link to={`/view/${Plantdetailsview.plantid}`}>
+            <Button type="primary" style={{ marginTop: '8px' }}>
+              Product Details</Button> </Link>
           </Card>
         ))}
     </div>
