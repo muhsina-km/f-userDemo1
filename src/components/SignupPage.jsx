@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Form, Input, Button, Row, Col, Typography, message } from 'antd';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import Navbar from './Navbar';
 const { Text } = Typography
 const SignupPage = () => {
 
@@ -43,6 +44,7 @@ const SignupPage = () => {
     
     return (
         <div>
+            <Navbar/>
             <Row justify="center" align="middle" style={{ minHeight: '100vh' }}>
                 <Col span={8}>
                     <center><h1>Signup</h1></center>

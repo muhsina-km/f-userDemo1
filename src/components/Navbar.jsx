@@ -29,9 +29,12 @@ const Navbar = () => {
           </Typography>
 
           <Box sx={{ flexGrow: 10, display: 'flex', justifyContent: 'center', gap: '18px', color:'#000000' }}>
-            <Typography style={{fontSize:'14px'}}>HOME</Typography>
-            <Typography style={{fontSize:'14px'}}>SHOP</Typography>
-            <Typography style={{fontSize:'14px'}}>ABOUT</Typography>
+            <Typography style={{fontSize:'14px'}} component={Link} to="/">
+              HOME</Typography>
+            <Typography style={{fontSize:'14px'}} component={Link} to="/home">
+              SHOP</Typography>
+            <Typography style={{fontSize:'14px'}}>
+              ABOUT</Typography>
           </Box>
 
           <Button component={Link} to="/login"
