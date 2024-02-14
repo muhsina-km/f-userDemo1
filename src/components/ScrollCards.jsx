@@ -66,7 +66,7 @@ const ScrollCards = () => (
     </SplideSlide>
 
     <SplideSlide style={splidestyle}>
-      <img src="https://i.pinimg.com/564x/6a/88/ac/6a88acc6aeba64340c28beceedb6e15f.jpg" 
+      <img src="https://img.freepik.com/free-photo/single-light-pink-gerbera-daisy-flower-gray-background_53876-142959.jpg?t=st=1707923110~exp=1707923710~hmac=651fcb3fbd253393473275c04d527d2033dbe6120313aa289decdaf17410bb96" 
       style={imgstyle} />
     </SplideSlide>
     

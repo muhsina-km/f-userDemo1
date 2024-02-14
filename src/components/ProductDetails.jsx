@@ -17,7 +17,7 @@ const ProductDetails = () => {
         setPlantdetailsview(response.data);
       })
       .catch((err) => console.log(err));
-  }, [plantid]);
+  }, [plantid])
 
   if (!Plantdetailsview) {
     return <div>Loading...</div>; // You can customize the loading state

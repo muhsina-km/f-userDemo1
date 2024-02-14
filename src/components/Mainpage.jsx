@@ -5,6 +5,7 @@ import ScrollCards from './ScrollCards'
 import { Button, Divider, Row } from 'antd'
 import PlantCard from './PlantCard'
 import PlanttypeCard from './PlanttypeCard'
+import AboutPage from './AboutPage'
 
 const Mainpage = () => {
 
@@ -23,6 +24,7 @@ const Mainpage = () => {
            <Divider orientation='left'><h3>Available Plants</h3></Divider>
            <Row style={{marginBottom:'100px'}}><PlantCard/></Row>
           </Row>
+            <AboutPage/>
             <Footer/>
         </div>
     )

@@ -33,7 +33,7 @@ const Navbar = () => {
               HOME</Typography>
             <Typography style={{fontSize:'14px'}} component={Link} to="/home">
               SHOP</Typography>
-            <Typography style={{fontSize:'14px'}}>
+            <Typography style={{fontSize:'14px'}} component={Link} to="/about">
               ABOUT</Typography>
           </Box>
 
