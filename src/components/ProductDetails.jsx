@@ -1,14 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import baseurl from "../Api";
-import { Badge, Col, Image, Row, Tag, Typography } from "antd";
+import { Badge, Button, Col, Image, Row, Space, Tag, Typography } from "antd";
 import colorNames from "colornames";
+import { ArrowLeftOutlined } from "@ant-design/icons";
+import SmallSlider from "./SmallSlider";
 
 const ProductDetails = () => {
   const { plantid } = useParams();
   const { Text, Title, Paragraph } = Typography;
   const [Plantdetailsview, setPlantdetailsview] = useState();
+  const [similarproducts, setSimilarproducts] = useState([]);
+
+  const fetchsimilarData = async (query) => {
+    try {
+      const name = query;
+      const response = await axios.get(`${baseurl}/plantdetails/ptview/${name}`);
+      setSimilarproducts(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
 
   useEffect(() => {
     // Fetch the details of the product with id
@@ -19,10 +33,15 @@ const ProductDetails = () => {
         setPlantdetailsview(response.data[0]);
       })
       .catch((err) => console.log(err));
+      fetchsimilarData(Plantdetailsview.planttypeid);
   }, [plantid]);
 
   if (!Plantdetailsview) {
     return <div>Loading...</div>; // You can customize the loading state
+  }
+
+  const handleBack = () => {
+    window.history.back();
   }
 
   return (
@@ -40,7 +59,7 @@ const ProductDetails = () => {
             }}
           />
         </Col>
-        <Col span={12} style={{marginBottom:'7px'}}>
+        <Col span={12} style={{ marginBottom: '7px' }}>
           <h2>{Plantdetailsview.plantname}</h2>
           <Title level={4} type="secondary" strong>
             Price: ₹{Plantdetailsview.price}
@@ -50,20 +69,35 @@ const ProductDetails = () => {
           <br />
           <Text type="secondary">
             Color:{" "}</Text>
-            <Tag
-            style={{color:'black'}}
-              size="large"
-              color={colorNames(Plantdetailsview.color)
-              }
-            >
-              {Plantdetailsview.color}
-            </Tag>
+          <Tag
+            style={{ color: 'black' }}
+            size="large"
+            color={colorNames(Plantdetailsview.color)
+            }
+          >
+            {Plantdetailsview.color}
+          </Tag>
           <br />
           <br />
           <Paragraph>Description: {Plantdetailsview.description}</Paragraph>
+          <br />
+          <Space>
+            <Button type="primary" shape="round" size={"medium"}>
+              Buy Now
+            </Button>
+            <Button type="primary" shape="round" size={"medium"}>
+              Add to Cart
+            </Button>
+          </Space>
         </Col>
       </Row>
       {/* You can display other details of the product */}
+      <Button onClick={handleBack}
+      icon={<ArrowLeftOutlined />} size={"small"} style={{color:'black'}} >
+        Back to Home
+      </Button>
+
+      <SmallSlider products={similarproducts}></SmallSlider>
     </div>
   );
 };
