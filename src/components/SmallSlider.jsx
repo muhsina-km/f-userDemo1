@@ -8,16 +8,17 @@ const SmallSlider = ({ products }) => {
 
   return (
     <Splide
+    style={{ marginBottom: "100px"}}
       options={{
-        perPage: isMobile ? 2 : 5,
+        perPage: isMobile ? 2 : 6,
         rewind: true,
-        gap: '1rem',
+        gap: '0.2rem',
       }}
       aria-label="My Favorite Images"
     >
       {products.map((product, index) => (
-        <SplideSlide key={index}>
-          <ProductCard productName={'hello'} imageUrl={product.imageUrl} />
+        <SplideSlide key={index} style={index === 0 ? { marginLeft: '30px' } : undefined}>
+          <ProductCard id={product.plantid} productName={product.plantname} imageUrl={product.plantphoto} />
         </SplideSlide>
       ))}
     </Splide>

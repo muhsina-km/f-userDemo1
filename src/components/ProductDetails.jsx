@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import baseurl from "../Api";
-import { Badge, Button, Col, Image, Row, Space, Tag, Typography } from "antd";
+import { Badge, Button, Col, Divider, Image, Row, Space, Tag, Typography } from "antd";
 import colorNames from "colornames";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import SmallSlider from "./SmallSlider";
@@ -17,12 +17,18 @@ const ProductDetails = () => {
     try {
       const name = query;
       const response = await axios.get(`${baseurl}/plantdetails/ptview/${name}`);
+      console.log(response.data);
       setSimilarproducts(response.data);
     } catch (error) {
       console.error(error);
     }
   };
 
+useEffect(() => {
+  if(Plantdetailsview){
+      fetchsimilarData(Plantdetailsview.planttypeid);
+    }
+}, [Plantdetailsview]);
 
   useEffect(() => {
     // Fetch the details of the product with id
@@ -33,7 +39,7 @@ const ProductDetails = () => {
         setPlantdetailsview(response.data[0]);
       })
       .catch((err) => console.log(err));
-      fetchsimilarData(Plantdetailsview.planttypeid);
+      
   }, [plantid]);
 
   if (!Plantdetailsview) {
@@ -96,7 +102,7 @@ const ProductDetails = () => {
       icon={<ArrowLeftOutlined />} size={"small"} style={{color:'black'}} >
         Back to Home
       </Button>
-
+<Divider orientation="left"><h3>Similar Plants</h3></Divider>
       <SmallSlider products={similarproducts}></SmallSlider>
     </div>
   );

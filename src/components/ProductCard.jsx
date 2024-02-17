@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Card } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
+import { EyeOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
 const { Meta } = Card;
@@ -19,13 +19,13 @@ const ProductCard = ({ id,productName, imageUrl,ofPrice,orPrice }) => (
     }}
     cover={
       <div style={{ width: "150px", height: "150px" }}>
-      <img src={imageUrl} style={{ maxWidth: "100%", maxHeight: "100%", margin: "auto", objectFit: "cover" }} />
+      <img src={imageUrl} style={{width: "100%",height: "100%", maxWidth: "100%", maxHeight: "100%",objectFit: "cover" }} />
     </div>
     
   }
     actions={[
-        <Link to={`/category/${productName}`} onClick={handleLinkClick}><Button type="primary" icon={<SearchOutlined></SearchOutlined>}>
-        See More
+        <Link to={`/view/${id}`} onClick={handleLinkClick}><Button type="primary" icon={<EyeOutlined />}>
+        View
       </Button></Link>
     ]}
   >
