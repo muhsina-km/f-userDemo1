@@ -15,16 +15,18 @@ const Mainpage = () => {
             <Navbar />
            <br /> <br />
            <Row>
-          <Row style={{marginTop:"20px"}}>
+          <Row style={{marginTop:"20px", marginBottom:"10px", }}>
            <ScrollCards/></Row>
            <br /> <br />
            <Divider orientation='left'><h3>Available Plant Types</h3></Divider>
            <Row style={{marginBottom:'0px', marginTop:'0px', }}><PlanttypeCard/></Row>
            <br /> <br />
            <Divider orientation='left'><h3>Available Plants</h3></Divider>
-           <Row style={{marginBottom:'100px'}}><PlantCard/></Row>
+           <Row style={{marginBottom:'0px', marginTop:'0px', }}><PlantCard/></Row>
+           <br /> <br />
+           <Divider orientation='left'> <h3 id='About'>About Us</h3>  </Divider>
+           <Row style={{marginBottom:'0px', marginTop:'0px', }}><AboutPage/></Row>
           </Row>
-            <AboutPage/>
             <Footer/>
         </div>
     )

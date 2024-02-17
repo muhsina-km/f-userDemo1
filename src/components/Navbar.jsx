@@ -6,8 +6,14 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
 import { Link } from 'react-router-dom';
+import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 
 const Navbar = () => {
+
+  const scrollToTop = () => {
+    scroll.scrollToTop();
+  }
+
   return (
     <div>
         <Box sx={{ flexGrow: 1 }}>
@@ -29,12 +35,13 @@ const Navbar = () => {
           </Typography>
 
           <Box sx={{ flexGrow: 10, display: 'flex', justifyContent: 'center', gap: '18px', color:'#000000' }}>
-            <Typography style={{fontSize:'14px'}} component={Link} to="/">
+            <Typography style={{fontSize:'14px'}} component={Link} to="/" onClick={scrollToTop}>
               HOME</Typography>
-            <Typography style={{fontSize:'14px'}} component={Link} to="/home">
+            <Typography style={{fontSize:'14px'}} component={Link} to="/home" onClick={scrollToTop}>
               SHOP</Typography>
-            <Typography style={{fontSize:'14px'}} component={Link} to="/about">
-              ABOUT</Typography>
+            <ScrollLink to="About" smooth={true} duration={500}>
+            <Typography style={{fontSize:'14px', cursor:'pointer',}}>
+              ABOUT</Typography></ScrollLink>
           </Box>
 
           <Button component={Link} to="/login"
