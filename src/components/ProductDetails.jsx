@@ -47,7 +47,7 @@ useEffect(() => {
   }
 
   const handleBack = () => {
-    window.history.back();
+    window.location.href = '/home'
   }
 
   return (

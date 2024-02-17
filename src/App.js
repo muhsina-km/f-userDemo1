@@ -5,7 +5,6 @@ import LoginPage from "./components/LoginPage";
 import SignupPage from "./components/SignupPage";
 import ProductDetails from "./components/ProductDetails";
 import AboutPage from "./components/AboutPage";
-import Welcome from "./components/Welcome";
 
 function App() {
 
