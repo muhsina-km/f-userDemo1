@@ -17,6 +17,7 @@
     "axios": "^1.6.7",
     "bootstrap": "^3.4.1",
     "bootstrap-icons": "^1.11.3",
+    "colornames": "^1.1.1",
     "lord-icon-element": "^4.1.2",
     "react": "^18.2.0",
     "react-awesome-reveal": "^4.2.8",
