@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
+import BottomNavbar from './BottomNavbar'
 import Footer from './Footer'
 import './Style.css'
 import axios from 'axios'
 import baseurl from '../Api'
-import { Card, Button } from 'antd';
+import { Card, Button, Row } from 'antd';
 import Meta from 'antd/es/card/Meta'
 import { Link, useParams } from 'react-router-dom'
 import { motion } from 'framer-motion';
@@ -52,8 +53,10 @@ const Home = () => {
           </Card></motion.div>
         ))}
     </div>
-    
-    <Footer/>
+     <div>
+      <BottomNavbar/>
+     </div>
+    <Footer />
     </div>
   )
 }

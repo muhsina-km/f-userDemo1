@@ -2,12 +2,15 @@ import { Button } from '@mui/material'
 import { Card } from 'antd'
 import Meta from 'antd/es/card/Meta'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const PlanttypeCard = () => {
   return (
 
     <div>
-      <Button style={{ color: 'black', marginLeft: '1120px', }}>View All</Button>
+      <Button component={Link} to="/categories"
+      style={{ color: 'black', marginLeft: '1120px', }}>
+        View All</Button>
 
     <div
     style={{ display: 'flex', justifyContent: 'center', padding: '4px' }}>

@@ -40,14 +40,16 @@ const Navbar = () => {
           >
             <b>BloomingBuds</b>
           </Typography>
+
           <Search
-      placeholder="input search text"
+      placeholder="Search for plants"
       onSearch={onSearch}
       style={{
-        width: 200,
+        width: 250,
       }}
     />
-          <Box sx={{ flexGrow: 10, display: 'flex', justifyContent: 'center', gap: '18px', color:'#000000' }}>
+
+          <Box sx={{ flexGrow: 6, display: 'flex', justifyContent: 'center', gap: '18px', color:'#000000' }}>
             <Typography style={{fontSize:'14px'}} component={Link} to="/" onClick={scrollToTop}>
               HOME</Typography>
             <Typography style={{fontSize:'14px'}} component={Link} to="/home" onClick={scrollToTop}>

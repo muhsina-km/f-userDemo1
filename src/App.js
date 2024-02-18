@@ -6,6 +6,7 @@ import SignupPage from "./components/SignupPage";
 import ProductDetails from "./components/ProductDetails";
 import AboutPage from "./components/AboutPage";
 import SearchPage from "./components/SearchPage";
+import Category from "./components/Category";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
       <Route path="/search/:query" element={<SearchPage/>}></Route>
       <Route path="/view/:plantid" element={<ProductDetails/>}></Route>
       <Route path="/about" element={<AboutPage/>}></Route>
+      <Route path="/categories" element={<Category/>}></Route>
         
       </Routes>
       </BrowserRouter>
