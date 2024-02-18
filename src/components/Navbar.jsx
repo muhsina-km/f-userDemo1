@@ -5,13 +5,20 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
+import { Input } from 'antd';
 
 const Navbar = () => {
-
+  const { Search } = Input;
+  const navigate = useNavigate();
   const scrollToTop = () => {
     scroll.scrollToTop();
+  }
+  const onSearch = (value) => {
+    console.log(value)
+    navigate(`/search/${value}`)
+
   }
 
   return (
@@ -33,7 +40,13 @@ const Navbar = () => {
           >
             <b>BloomingBuds</b>
           </Typography>
-
+          <Search
+      placeholder="input search text"
+      onSearch={onSearch}
+      style={{
+        width: 200,
+      }}
+    />
           <Box sx={{ flexGrow: 10, display: 'flex', justifyContent: 'center', gap: '18px', color:'#000000' }}>
             <Typography style={{fontSize:'14px'}} component={Link} to="/" onClick={scrollToTop}>
               HOME</Typography>

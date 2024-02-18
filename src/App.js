@@ -5,6 +5,7 @@ import LoginPage from "./components/LoginPage";
 import SignupPage from "./components/SignupPage";
 import ProductDetails from "./components/ProductDetails";
 import AboutPage from "./components/AboutPage";
+import SearchPage from "./components/SearchPage";
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
       <Route path="/home" element={<Home/>}></Route>
       <Route path="/login" element={<LoginPage/>}></Route>
       <Route path="/register" element={<SignupPage/>}></Route>
+      <Route path="/search/:query" element={<SearchPage/>}></Route>
       <Route path="/view/:plantid" element={<ProductDetails/>}></Route>
       <Route path="/about" element={<AboutPage/>}></Route>
         

@@ -6,12 +6,14 @@ import axios from 'axios'
 import baseurl from '../Api'
 import { Card, Button } from 'antd';
 import Meta from 'antd/es/card/Meta'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import { motion } from 'framer-motion';
 
 const Home = () => {
 
   const [Plantdetailsview, setPlantdetailsview] = useState([]);
   const [trigger, setTrigger] = useState(false);
+  const [animationCompleted, setAnimationCompleted] = useState(false);
     
   useEffect(() => {
     axios
@@ -21,6 +23,8 @@ const Home = () => {
         setPlantdetailsview(response.data);
       })
       .catch((err) => console.log(err));
+    
+    setAnimationCompleted(true);
   }, [trigger]);
 
   return (
@@ -28,7 +32,12 @@ const Home = () => {
       <Navbar/>
      
           <div className='product-grid'>
-        {Plantdetailsview.map((Plantdetailsview) => (
+        {Plantdetailsview.map((Plantdetailsview,index) => (
+          <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={animationCompleted ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: animationCompleted ? 0.1 * index : 0 }}
+        >
           <Card
             key={Plantdetailsview.id}
             hoverable
@@ -40,7 +49,7 @@ const Home = () => {
             <Link to={`/view/${Plantdetailsview.plantid}`}>
             <Button type="primary" style={{ marginTop: '8px' }}>
               Product Details</Button> </Link>
-          </Card>
+          </Card></motion.div>
         ))}
     </div>
     
