@@ -8,6 +8,7 @@ import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
 import { Link, useNavigate } from 'react-router-dom';
 import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 import { Input } from 'antd';
+import { ShoppingCartOutlined } from '@ant-design/icons';
 
 const Navbar = () => {
   const { Search } = Input;
