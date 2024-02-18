@@ -1,8 +1,5 @@
 import React from 'react'
 import './Style.css'
-import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
-import { Flex, Tooltip, Typography } from 'antd';
-import { Box } from '@mui/material';
 
 const Footer = () => {
   return (
