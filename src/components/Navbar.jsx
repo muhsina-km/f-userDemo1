@@ -5,10 +5,10 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link, useNavigate } from 'react-router-dom';
 import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
 import { Input } from 'antd';
-import { ShoppingCartOutlined } from '@ant-design/icons';
 
 const Navbar = () => {
   const { Search } = Input;
@@ -41,7 +41,7 @@ const Navbar = () => {
           >
             <b>BloomingBuds</b>
           </Typography>
-
+            &nbsp; &nbsp; &nbsp;
           <Search
       placeholder="Search for plants"
       onSearch={onSearch}
@@ -58,6 +58,10 @@ const Navbar = () => {
             <ScrollLink to="About" smooth={true} duration={500}>
             <Typography style={{fontSize:'14px', cursor:'pointer',}}>
               ABOUT</Typography></ScrollLink>
+               &nbsp; &nbsp; &nbsp;
+              <Typography style={{fontSize:'14px'}} component={Link} to="/cart">
+              <ShoppingCartIcon sx={{
+            fontSize:20, color:'#000000'}}/></Typography>
           </Box>
 
           <Button component={Link} to="/login"

@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import baseurl from "../Api";
 import { Badge, Button, Col, Divider, Image, Row, Space, Tag, Typography } from "antd";
 import colorNames from "colornames";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import SmallSlider from "./SmallSlider";
+import { useCart } from "./CartContext";
 
 const ProductDetails = () => {
   const { plantid } = useParams();
+  const {addToCart} = useCart();
+  const navigate = useNavigate();
   const { Text, Title, Paragraph } = Typography;
   const [Plantdetailsview, setPlantdetailsview] = useState();
   const [similarproducts, setSimilarproducts] = useState([]);
@@ -48,6 +51,14 @@ useEffect(() => {
 
   const handleBack = () => {
     window.location.href = '/home'
+  }
+
+  const handleAddToCart = (event) => {
+    event.preventDefault();
+    addToCart(Plantdetailsview);
+    console.log(Plantdetailsview)
+    alert("Item added to cart")
+    navigate('/cart');
   }
 
   return (
@@ -91,7 +102,7 @@ useEffect(() => {
             <Button type="primary" shape="round" size={"medium"}>
               Buy Now
             </Button>
-            <Button type="primary" shape="round" size={"medium"}>
+            <Button type="primary" shape="round" size={"medium"} onClick={(event) => handleAddToCart(event)}>
               Add to Cart
             </Button>
           </Space>
