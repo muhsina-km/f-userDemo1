@@ -6,11 +6,9 @@ import { Badge, Button, Col, Divider, Image, Row, Space, Tag, Typography } from 
 import colorNames from "colornames";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import SmallSlider from "./SmallSlider";
-import { useCart } from "./CartContext";
 
 const ProductDetails = () => {
   const { plantid } = useParams();
-  const {addToCart} = useCart();
   const navigate = useNavigate();
   const { Text, Title, Paragraph } = Typography;
   const [Plantdetailsview, setPlantdetailsview] = useState();
@@ -53,13 +51,6 @@ useEffect(() => {
     window.location.href = '/home'
   }
 
-  const handleAddToCart = (event) => {
-    event.preventDefault();
-    addToCart(Plantdetailsview);
-    console.log(Plantdetailsview)
-    alert("Item added to cart")
-    navigate('/cart');
-  }
 
   return (
     <div>
@@ -102,7 +93,7 @@ useEffect(() => {
             <Button type="primary" shape="round" size={"medium"}>
               Buy Now
             </Button>
-            <Button type="primary" shape="round" size={"medium"} onClick={(event) => handleAddToCart(event)}>
+            <Button type="primary" shape="round" size={"medium"}>
               Add to Cart
             </Button>
           </Space>

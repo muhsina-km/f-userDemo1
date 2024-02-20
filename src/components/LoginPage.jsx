@@ -16,7 +16,10 @@ const LoginPage = () => {
     axios.post('http://localhost:4005/register/login', { email, password })
       .then(result => {
         if (result.data === "Success") {
-          navigate('/home')
+          localStorage.setItem('user', JSON.stringify({email}));
+          const profile = {email};
+          console.log(profile)
+          navigate('/profile')
         } else {
           messageApi.open({
             type: 'error',
