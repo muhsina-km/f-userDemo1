@@ -28,6 +28,7 @@ const Home = () => {
     setAnimationCompleted(true);
   }, [trigger]);
 
+
   return (
     <div>
       <Navbar/>

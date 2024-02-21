@@ -13,13 +13,13 @@ const LoginPage = () => {
 
   const onFinish = (values) => {
     const { email, password } = values;
-    axios.post('http://localhost:4005/register/login', { email, password })
+    axios
+    .post('http://localhost:4005/register/login', { email, password })
       .then(result => {
         if (result.data === "Success") {
-          localStorage.setItem('user', JSON.stringify({email}));
-          const profile = {email};
-          console.log(profile)
-          navigate('/profile')
+          const userProfile = {email};
+          localStorage.setItem('user', JSON.stringify(userProfile));
+          navigate('/home')
         } else {
           messageApi.open({
             type: 'error',
