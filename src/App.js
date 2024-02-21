@@ -7,6 +7,7 @@ import ProductDetails from "./components/ProductDetails";
 import AboutPage from "./components/AboutPage";
 import SearchPage from "./components/SearchPage";
 import Category from "./components/Category";
+import ViewCart from "./components/ViewCart";
 import { useState } from "react";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <Routes>
       <Route path="/" element={<Mainpage/>}></Route>
       <Route path="/home" element={<Home/>}></Route>
+      <Route path="/cart" element={<ViewCart/>}></Route>
       <Route path="/login" element={<LoginPage onLogin={(userData) => setUser(userData)}/>}></Route>
       <Route path="/register" element={<SignupPage/>}></Route>
       <Route path="/search/:query" element={<SearchPage/>}></Route>
