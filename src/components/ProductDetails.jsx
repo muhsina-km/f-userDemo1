@@ -2,14 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import baseurl from "../Api";
-import { Badge, Button, Col, Divider, Image, Row, Space, Tag, Typography } from "antd";
+import { Badge, Button, Col, Divider, Image, Modal, Row, Space, Tag, Typography, message, notification } from "antd";
 import colorNames from "colornames";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import SmallSlider from "./SmallSlider";
+import AddToCart from "../popups/AddToCart";
 
 const ProductDetails = () => {
   const { plantid } = useParams();
   const navigate = useNavigate();
+  const [api, contextHolder] = notification.useNotification();
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const { Text, Title, Paragraph } = Typography;
   const [Plantdetailsview, setPlantdetailsview] = useState();
   const [similarproducts, setSimilarproducts] = useState([]);
@@ -47,6 +50,14 @@ useEffect(() => {
     return <div>Loading...</div>; // You can customize the loading state
   }
 
+  const handleAddToCart = () => {
+    notification.open({
+      type: 'success',
+      message: 'Added to cart',
+      placement: 'topLeft',
+    })
+    setIsModalVisible(false);
+  }
   const handleBack = () => {
     window.location.href = '/home'
   }
@@ -54,6 +65,7 @@ useEffect(() => {
 
   return (
     <div>
+      {contextHolder}
       <Row gutter={16} style={{ margin: "50px" }}>
         <Col span={8}>
           <Image
@@ -93,7 +105,7 @@ useEffect(() => {
             <Button type="primary" shape="round" size={"medium"}>
               Buy Now
             </Button>
-            <Button type="primary" shape="round" size={"medium"}>
+            <Button type="primary" shape="round" size={"medium"} onClick={() => setIsModalVisible(true)}>
               Add to Cart
             </Button>
           </Space>
@@ -106,6 +118,10 @@ useEffect(() => {
       </Button>
 <Divider orientation="left"><h3>Similar Plants</h3></Divider>
       <SmallSlider products={similarproducts}></SmallSlider>
+      <Modal
+        footer={null}
+        open={isModalVisible}
+        ><AddToCart productId={plantid} onClose={() => setIsModalVisible(false)} addedToCart={handleAddToCart} /></Modal>
     </div>
   );
 };
