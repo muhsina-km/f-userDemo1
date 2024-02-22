@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
-import { Card, Row } from 'antd'
+import { Card, Col, Row } from 'antd'
 import axios from 'axios'
+import CartCard from './CartCard'
 
 const ViewCart = () => {
     const [cart, setCart] = useState([])
@@ -21,23 +22,29 @@ const ViewCart = () => {
         .catch(err => {
             console.log(err);
         });
+        axios.get('http://localhost:4005/cart/calculate-total-price', {
+            params: {
+                email: email
+            }
+        })
+        .then(res => {
+            console.log(res.data);
+            setCart(res.data.cart.items);
+        })
+        .catch(err => {
+            console.log(err);
+        });
     }, []); 
     
   return (
     <div>
         <Navbar/><h1 style={{marginTop:'80px', textAlign:'center'}}>View Cart</h1>
-        <Row style={{marginTop:'100px'}}>
-            <div className='categ-grid' style={{ display: 'grid', justifyContent: 'center', padding: '10px', marginBottom: '100px' }}>
+        <Row style={{marginTop:'10px'}} gutter={16}>
                 {cart.map(item => (
-                    <Card
-                        hoverable
-                        style={{ width: 240, margin: '16px' }}
-                        // cover={<img alt="plant" src={item.image}
-                        >
-                        <Meta title={item.quantity} description={item.productId} />
-                        </Card>
+                    <Col sm={12} md={8} lg={8} xl={4} key={item.productId}>
+                    <CartCard id={item.productId} counts={item.quantity}/>
+                    </Col>
                 ))}
-            </div>
         </Row></div>
   )
 }
