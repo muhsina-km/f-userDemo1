@@ -22,6 +22,7 @@ const ViewCart = () => {
         .catch(err => {
             console.log(err);
         });
+
         axios.get('http://localhost:4005/cart/calculate-total-price', {
             params: {
                 email: email
@@ -45,7 +46,8 @@ const ViewCart = () => {
                     <CartCard id={item.productId} counts={item.quantity}/>
                     </Col>
                 ))}
-        </Row></div>
+        </Row>
+        </div>
   )
 }
 

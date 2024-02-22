@@ -9,6 +9,7 @@ import SearchPage from "./components/SearchPage";
 import Category from "./components/Category";
 import ViewCart from "./components/ViewCart";
 import { useState } from "react";
+import EachCategory from "./components/EachCategory";
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
       <Route path="/view/:plantid" element={<ProductDetails/>}></Route>
       <Route path="/about" element={<AboutPage/>}></Route>
       <Route path="/categories" element={<Category/>}></Route>
+      <Route path="/products/:category" element={<EachCategory/>}></Route>
       </Routes>
       </BrowserRouter>
 

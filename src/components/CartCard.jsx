@@ -35,7 +35,6 @@ useEffect(() => {
             </Col>
             </Row>
         </Row></>):<Skeleton active/>}
-        
       </Card>
   )
 }
