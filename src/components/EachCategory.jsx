@@ -44,11 +44,6 @@ const EachCategory = () => {
     );
   }
 
-  const handleBack = () => {
-    navigate(-1);
-  }
-
-
 
   return (
     <div>
@@ -63,7 +58,7 @@ const EachCategory = () => {
             <Link to='/categories'>Categories</Link>
           </Breadcrumb.Item>
           <Breadcrumb.Item>
-            <Link to={`/categories/${category}`}>{category}</Link>
+            <Link to=''>{category}</Link>
           </Breadcrumb.Item>
         </Breadcrumb>
           <Divider style={{ marginBottom: '-100px', marginTop: '100px' }} orientation='left'>
@@ -95,13 +90,6 @@ const EachCategory = () => {
           </div>
         </>
       )}
-               <div>
-                <br />
-      <Button onClick={handleBack}
-      icon={<ArrowLeftOutlined />} size={"small"} style={{color:'black'}} >
-        Back to Home
-      </Button>
-      </div>
       <Footer />
     </div>
   );

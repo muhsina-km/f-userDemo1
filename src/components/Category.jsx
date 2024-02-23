@@ -30,7 +30,7 @@ const Category = () => {
       <Navbar />
       <Breadcrumb style={{ marginBottom: '-80px', marginTop: '100px',marginLeft:'50px' }}>
           <Breadcrumb.Item>
-            <Link to='/'>Home</Link>
+            <Link to='/home'>Home</Link>
           </Breadcrumb.Item>
           <Breadcrumb.Item>
             <Link to='/categories'>Categories</Link>

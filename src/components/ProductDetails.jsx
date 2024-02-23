@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import baseurl from "../Api";
-import { Badge, Button, Col, Divider, Image, Modal, Row, Space, Tag, Typography, message, notification } from "antd";
+import { Badge, Breadcrumb, Button, Col, Divider, Image, Modal, Row, Space, Tag, Typography, message, notification } from "antd";
 import colorNames from "colornames";
 import { ArrowLeftOutlined, HeartOutlined, HeartFilled } from "@ant-design/icons";
 import SmallSlider from "./SmallSlider";
@@ -99,13 +99,18 @@ useEffect(() => {
     })
     setIsModalVisible(false);
   }
-  const handleBack = () => {
-    window.location.href = '/home'
-  }
 
 
   return (
     <div>
+      <Breadcrumb style={{ marginLeft:'60px', marginTop:'20px', marginBottom:'-30px' }}>
+          <Breadcrumb.Item>
+            <Link to='/home'>Home</Link>
+          </Breadcrumb.Item>
+          <Breadcrumb.Item>
+            <Link to=''>Product</Link>
+          </Breadcrumb.Item>
+        </Breadcrumb>
       {contextHolder}
       <Row gutter={16} style={{ margin: "50px" }}>
         <Col span={8}>
@@ -157,10 +162,7 @@ useEffect(() => {
         </Col>
       </Row>
       {/* You can display other details of the product */}
-      <Button onClick={handleBack}
-      icon={<ArrowLeftOutlined />} size={"small"} style={{color:'black'}} >
-        Back to Home
-      </Button>
+  
 <Divider orientation="left"><h3>Similar Plants</h3></Divider>
       <SmallSlider products={similarproducts}></SmallSlider>
       <Modal

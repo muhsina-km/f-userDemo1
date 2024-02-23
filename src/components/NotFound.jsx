@@ -3,12 +3,13 @@ import React from 'react'
 import notfound from '../assets/notfound.json'
 import { Button, Col, Row } from 'antd'
 import { useNavigate } from 'react-router-dom'
+import { Refresh } from '@mui/icons-material'
 
 const NotFound = () => {
     const navigate = useNavigate()
 
     const handleClick = () => {
-      window.location.href = '/home'
+     navigate('-1')
     }
 
   return (

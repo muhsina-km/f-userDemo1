@@ -5,7 +5,7 @@ import Footer from './Footer'
 import './Style.css'
 import axios from 'axios'
 import baseurl from '../Api'
-import { Card, Button, Row } from 'antd';
+import { Card, Button, Row, Breadcrumb } from 'antd';
 import Meta from 'antd/es/card/Meta'
 import { Link, useParams } from 'react-router-dom'
 import { motion } from 'framer-motion';
@@ -37,7 +37,14 @@ const email = user ? JSON.parse(user).email : null;
   return (
     <div>
       <Navbar/>
-     
+      <Breadcrumb style={{ marginLeft:'60px', marginTop:'100px', marginBottom:'-80px' }}>
+          <Breadcrumb.Item>
+            <Link to='/home'>Home</Link>
+          </Breadcrumb.Item>
+          <Breadcrumb.Item>
+            <Link to=''>wishlist</Link>
+          </Breadcrumb.Item>
+        </Breadcrumb>
           <div className='product-grid'>
         {Plantdetailsview.map((Plantdetailsview,index) => (
           <motion.div
