@@ -61,7 +61,7 @@ const EachCategory = () => {
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={animationCompleted ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: animationCompleted ? 0.1 * index : 0 }}
+                transition={{type:'spring', delay: animationCompleted ? 0.1 * index : 0 }}
               >
                 <Card
                   key={Plantdetailsview.id}

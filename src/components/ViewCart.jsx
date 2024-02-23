@@ -6,6 +6,7 @@ import CartCard from './CartCard'
 import {motion} from 'framer-motion';
 import { Footer } from 'antd/es/layout/layout'
 import { ShoppingCartOutlined } from '@ant-design/icons'
+import CountUp from 'react-countup'
 
 const ViewCart = () => {
     const [cart, setCart] = useState([])
@@ -57,7 +58,7 @@ const ViewCart = () => {
                     </Col></motion.div>
                 ))}
         </Row>
-        <Footer style={{borderTop:'1px solid #E2E2E2',alignItems:'center', height: '70px',textAlign: 'center',position: 'fixed', bottom: '0', width: '100%',display:'flex',justifyContent:'space-between' }}><h3>Total Price:₹{total}</h3><Button type="primary" icon={<ShoppingCartOutlined />}>Place Order</Button></Footer>
+        <Footer style={{borderTop:'1px solid #E2E2E2',alignItems:'center', height: '70px',textAlign: 'center',position: 'fixed', bottom: '0', width: '100%',display:'flex',justifyContent:'space-between' }}><h3>Total Price:₹<CountUp end={total} /></h3><Button type="primary" icon={<ShoppingCartOutlined />}>Place Order</Button></Footer>
         </div>
   )
 }
