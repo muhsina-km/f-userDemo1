@@ -11,12 +11,14 @@ const PlaceOrder = ({setOpened}) => {
   const [formdata, setFormdata] = useState({ name: "", phone: "", address: "", payment: "cash" });
   const [error, setError] = useState("");
   const [form] = Form.useForm();
-
+  const user = localStorage.getItem("user");
+  const email = user && JSON.parse(user).email;
   const handleOnChange = (values) => {
     console.log(formdata);
     setFormdata({
       ...formdata,
       ...values,
+      email: email,
     });
   };
   const handleOnFinish = () => {
