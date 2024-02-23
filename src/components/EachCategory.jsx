@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import { Card, Button, Divider } from 'antd';
+import { Card, Button, Divider, Breadcrumb } from 'antd';
 import Meta from 'antd/es/card/Meta';
 import { motion } from 'framer-motion';
 import NotFound from './NotFound';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import baseurl from '../Api';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 
 const EachCategory = () => {
+  const navigate = useNavigate();
   const { category } = useParams();
   const [Plantdetailsview, setPlantdetailsview] = useState([]);
   const [nothingFound, setNothingFound] = useState(false);
@@ -44,8 +45,9 @@ const EachCategory = () => {
   }
 
   const handleBack = () => {
-    window.location.href = '/home'
+    navigate(-1);
   }
+
 
 
   return (
@@ -53,6 +55,17 @@ const EachCategory = () => {
       <Navbar />
       {Plantdetailsview.length > 0 && (
         <>
+       <Breadcrumb style={{ marginBottom: '-80px', marginTop: '100px',marginLeft:'50px' }}>
+          <Breadcrumb.Item>
+            <Link to='/home'>Home</Link>
+          </Breadcrumb.Item>
+          <Breadcrumb.Item>
+            <Link to='/categories'>Categories</Link>
+          </Breadcrumb.Item>
+          <Breadcrumb.Item>
+            <Link to={`/categories/${category}`}>{category}</Link>
+          </Breadcrumb.Item>
+        </Breadcrumb>
           <Divider style={{ marginBottom: '-100px', marginTop: '100px' }} orientation='left'>
             <h2> {category} Plants </h2>
           </Divider>

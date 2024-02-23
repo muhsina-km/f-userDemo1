@@ -10,6 +10,7 @@ import Category from "./components/Category";
 import ViewCart from "./components/ViewCart";
 import { useState } from "react";
 import EachCategory from "./components/EachCategory";
+import WishList from "./components/WishList";
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
       <Routes>
       <Route path="/" element={<Mainpage/>}></Route>
       <Route path="/home" element={<Home/>}></Route>
+      <Route path="/favorites" element={<WishList/>}></Route>
       <Route path="/cart" element={<ViewCart/>}></Route>
       <Route path="/login" element={<LoginPage onLogin={(userData) => setUser(userData)}/>}></Route>
       <Route path="/register" element={<SignupPage/>}></Route>

@@ -8,9 +8,14 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { Link } from 'react-router-dom';
 
-export default function SimpleBottomNavigation() {
+export default function SimpleBottomNavigation({nowin}) {
   const [value, setValue] = React.useState(0);
-
+  
+  React.useEffect(()=>{
+    if(nowin=="wishlist"){
+      setValue(2)
+    }
+  })
   return (
     <Box sx={{ width: '100%', position: 'fixed', bottom: 0, zIndex: 1000 }}>
       <BottomNavigation

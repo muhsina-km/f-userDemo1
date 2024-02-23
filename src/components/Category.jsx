@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar';
 import BottomNavbar from './BottomNavbar';
 import Footer from './Footer';
-import { Card, Button, Divider } from 'antd';
+import { Card, Button, Divider, Breadcrumb } from 'antd';
 import Meta from 'antd/es/card/Meta';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -28,7 +28,14 @@ const Category = () => {
   return (
     <div>
       <Navbar />
-
+      <Breadcrumb style={{ marginBottom: '-80px', marginTop: '100px',marginLeft:'50px' }}>
+          <Breadcrumb.Item>
+            <Link to='/'>Home</Link>
+          </Breadcrumb.Item>
+          <Breadcrumb.Item>
+            <Link to='/categories'>Categories</Link>
+          </Breadcrumb.Item>
+        </Breadcrumb>
       <div className='product-grid'>
         {Ptype.map((Ptype, index) => (
           <motion.div

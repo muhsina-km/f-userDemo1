@@ -4,19 +4,59 @@ import axios from "axios";
 import baseurl from "../Api";
 import { Badge, Button, Col, Divider, Image, Modal, Row, Space, Tag, Typography, message, notification } from "antd";
 import colorNames from "colornames";
-import { ArrowLeftOutlined } from "@ant-design/icons";
+import { ArrowLeftOutlined, HeartOutlined, HeartFilled } from "@ant-design/icons";
 import SmallSlider from "./SmallSlider";
 import AddToCart from "../popups/AddToCart";
+import { addToWishlist, viewWishlist, removeFromWishlist, isInWishlist } from "../functions/wishlistApi";
 
 const ProductDetails = () => {
   const { plantid } = useParams();
   const navigate = useNavigate();
+  const [isInWishlisted, setIsInWishlist] = useState(false);
   const [api, contextHolder] = notification.useNotification();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { Text, Title, Paragraph } = Typography;
   const [Plantdetailsview, setPlantdetailsview] = useState();
   const [similarproducts, setSimilarproducts] = useState([]);
 
+  const [wishlist, setWishlist] = useState([]);
+
+  const user = localStorage.getItem("user");
+  const userEmail = user ? JSON.parse(user).email : null;
+
+  const handleAddToWishlist = async (plantid) => {
+    try {
+      await addToWishlist(userEmail, plantid);
+      setWishlist([...wishlist, plantid]);
+      setIsInWishlist(true);
+    } catch (error) {
+      console.error('Error adding item to wishlist:', error);
+    }
+  };
+  const handleRemoveFromWishlist = async (plantid) => {
+    try {
+      await removeFromWishlist(userEmail, plantid);
+      setWishlist(wishlist.filter((id) => id !== plantid));
+      setIsInWishlist(false);
+    } catch (error) {
+      console.error('Error removing item from wishlist:', error);
+      throw error;
+    }
+  };
+  useEffect(() => {
+    const fetchWishlist = async () => {
+      try {
+        isInWishlist(userEmail, plantid);
+        if (isInWishlist(userEmail, plantid)) {
+          setIsInWishlist(true);
+        }
+      }
+      catch (error) {
+        console.error('Error checking if plant is in wishlist:', error);
+      }
+  }
+  fetchWishlist();
+  }, [plantid, userEmail]);
   const fetchsimilarData = async (query) => {
     try {
       const name = query;
@@ -27,6 +67,7 @@ const ProductDetails = () => {
       console.error(error);
     }
   };
+
 
 useEffect(() => {
   if(Plantdetailsview){
@@ -108,6 +149,10 @@ useEffect(() => {
             <Button type="primary" shape="round" size={"medium"} onClick={() => setIsModalVisible(true)}>
               Add to Cart
             </Button>
+            {isInWishlisted ? (
+              <Button icon={<HeartFilled />} style={{color:'red'}} shape="round" size={"default"} onClick={() => handleRemoveFromWishlist(plantid)} />
+            ):
+            (<Button icon={<HeartOutlined />} shape="round" size={"default"} onClick={() => handleAddToWishlist(plantid)} />)}
           </Space>
         </Col>
       </Row>
