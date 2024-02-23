@@ -17,7 +17,7 @@ const ViewCart = () => {
         })
         .then(res => {
             console.log(res.data);
-            setCart(res.data.cart.items);
+            setCart(res.data.cart);
         })
         .catch(err => {
             console.log(err);
@@ -43,7 +43,7 @@ const ViewCart = () => {
         <Row style={{marginTop:'10px'}} gutter={16}>
                 {cart.map(item => (
                     <Col sm={12} md={8} lg={8} xl={4} key={item.productId}>
-                    <CartCard id={item.productId} counts={item.quantity}/>
+                    <CartCard data={item}/>
                     </Col>
                 ))}
         </Row>
