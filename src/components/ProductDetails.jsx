@@ -46,8 +46,7 @@ const ProductDetails = () => {
   useEffect(() => {
     const fetchWishlist = async () => {
       try {
-        isInWishlist(userEmail, plantid);
-        if (isInWishlist(userEmail, plantid)) {
+        if (await isInWishlist(userEmail, plantid)) {
           setIsInWishlist(true);
         }
       }
