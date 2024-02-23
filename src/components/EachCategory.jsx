@@ -8,13 +8,14 @@ import NotFound from './NotFound';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import baseurl from '../Api';
-import Category from './Category';
+import { ArrowLeftOutlined } from '@ant-design/icons';
 
 const EachCategory = () => {
   const { category } = useParams();
   const [Plantdetailsview, setPlantdetailsview] = useState([]);
   const [nothingFound, setNothingFound] = useState(false);
   const [animationCompleted, setAnimationCompleted] = useState(false);
+  const [trigger, setTrigger] = useState(false);
 
   useEffect(() => {
     if (category) {
@@ -30,7 +31,7 @@ const EachCategory = () => {
         .catch((err) => console.log(err));
     }
     setAnimationCompleted(true);
-  }, [category]);
+  }, [ trigger,category ]);
 
   if (nothingFound) {
     return (
@@ -42,13 +43,18 @@ const EachCategory = () => {
     );
   }
 
+  const handleBack = () => {
+    window.location.href = '/home'
+  }
+
+
   return (
     <div>
       <Navbar />
       {Plantdetailsview.length > 0 && (
         <>
           <Divider style={{ marginBottom: '-100px', marginTop: '100px' }} orientation='left'>
-            <h2> Plants </h2>
+            <h2> {category} Plants </h2>
           </Divider>
           <div className='product-grid'>
             {Plantdetailsview.map((Plantdetailsview, index) => (
@@ -76,7 +82,13 @@ const EachCategory = () => {
           </div>
         </>
       )}
-
+               <div>
+                <br />
+      <Button onClick={handleBack}
+      icon={<ArrowLeftOutlined />} size={"small"} style={{color:'black'}} >
+        Back to Home
+      </Button>
+      </div>
       <Footer />
     </div>
   );

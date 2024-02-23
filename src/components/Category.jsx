@@ -8,7 +8,6 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import baseurl from '../Api';
-import SmallSlider from './SmallSlider';
 
 const Category = () => {
   const [Ptype, setPtype] = useState([]);
@@ -24,6 +23,7 @@ const Category = () => {
       .catch((err) => console.log(err));
     setAnimationCompleted(true);
   }, []);
+
 
   return (
     <div>
@@ -52,7 +52,6 @@ const Category = () => {
           </motion.div>
         ))}
       </div>
-
       <div>
         <BottomNavbar />
       </div>
