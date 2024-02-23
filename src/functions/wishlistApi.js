@@ -50,16 +50,17 @@ const isInWishlist = async (email, plantid) => {
     try {
         const wishlist = await viewWishlist(email);
         const valueExists = wishlist.some(obj => obj.plantid === plantid);
+        console.log(valueExists);
+        if(valueExists) {
+            return true;
+        }
         if (!wishlist) {
             return false;
         }
         if (!wishlist.plantids) {
             return false;
         }
-        if(valueExists) {
-            return true;
-        }
-        return false;
+        
     } catch (error) {
         console.error('Error checking if plant is in wishlist:', error);
     }
