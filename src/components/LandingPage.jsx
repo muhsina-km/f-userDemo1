@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import AnimatedFlower from './AnimatedFlower';
 
 const LandingPage = () => {
   const textAnimation = useAnimation();
@@ -15,29 +16,30 @@ const LandingPage = () => {
       setTimeout(() => {
         // Redirect to the main page
         navigate('/mainpage'); // Replace with the actual path
-      }, 2000);
+      }, 4000);
     };
 
     animateOnLoad();
   }, [textAnimation, flowerAnimation, navigate]);
 
   return (
-    <div style={{ textAlign: 'center', paddingTop: '50px' }}>
-      <motion.h1
-        initial={{ opacity: 0, y: -50 }}
-        animate={textAnimation}
-        transition={{ duration: 1 }}
-      >
-        BloomingBuds
-      </motion.h1>
-      <motion.img
-        src="https://cdn4.iconfinder.com/data/icons/flowers-vol-1/256/42-512.png"
-        alt="flower"
-        style={{ width: '80px', height: '80px', opacity: 0, marginTop: '20px' }}
-        animate={flowerAnimation}
-        transition={{ duration: 1 }}
-      />
-    </div>
+    <AnimatedFlower />
+    // <div style={{ textAlign: 'center', paddingTop: '50px' }}>
+    //   <motion.h1
+    //     initial={{ opacity: 0, y: -50 }}
+    //     animate={textAnimation}
+    //     transition={{ duration: 1 }}
+    //   >
+    //     BloomingBuds
+    //   </motion.h1>
+    //   <motion.img
+    //     src="https://cdn4.iconfinder.com/data/icons/flowers-vol-1/256/42-512.png"
+    //     alt="flower"
+    //     style={{ width: '80px', height: '80px', opacity: 0, marginTop: '20px' }}
+    //     animate={flowerAnimation}
+    //     transition={{ duration: 1 }}
+    //   />
+    // </div>
   );
 };
 
