@@ -19,6 +19,24 @@ const ProductDetails = () => {
   const [Plantdetailsview, setPlantdetailsview] = useState();
   const [similarproducts, setSimilarproducts] = useState([]);
 
+  //order
+  const [isModalVisiblee, setIsModalVisiblee] = useState(false);
+
+  const handleBuyNow = async (plantid) => {
+    const userId = localStorage.getItem("user");
+      try {
+        const response = await 
+        axios.post(`${baseurl}/order/place-order`, { userId, products: [plantid] });
+        console.log(response.data);
+        notification.success({ message: 'Order placed successfully', placement: 'topLeft' });
+        setIsModalVisiblee(false);
+      } catch (error) {
+        console.error('Error placing order:', error);
+        notification.error({ message: 'Error placing order', placement: 'topLeft' });
+      }
+  };
+
+
   const [wishlist, setWishlist] = useState([]);
 
   const user = localStorage.getItem("user");
@@ -100,6 +118,15 @@ useEffect(() => {
     setIsModalVisible(false);
   }
 
+//  const handleBuyNow = () => {
+//    notification.open({
+//      type: 'success',
+//      message: 'Order Placed successfully',
+//      description: 'Thank you for shopping with us',
+//      placement: 'topLeft',
+//    })
+//  }
+
 
   return (
     <div>
@@ -148,7 +175,7 @@ useEffect(() => {
           <Paragraph>Description: {Plantdetailsview.description}</Paragraph>
           <br />
           <Space>
-            <Button type="primary" shape="round" size={"medium"}>
+            <Button type="primary" shape="round" size={"medium"} onClick={() => handleBuyNow()}>
               Buy Now
             </Button>
             <Button type="primary" shape="round" size={"medium"} onClick={() => setIsModalVisible(true)}>
