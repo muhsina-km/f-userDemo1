@@ -87,7 +87,7 @@ const ViewCart = () => {
                 footer={null}
                 onCancel={() => setIsPlaceOpen(false)}
                 >
-                    <PlaceOrder/>
+                    <PlaceOrder setOpened={setIsPlaceOpen}/>
                 </Modal>
         </div>
   )

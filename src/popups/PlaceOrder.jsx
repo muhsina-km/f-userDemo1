@@ -7,7 +7,7 @@ import ConfirmOrder from "../forms/ConfirmOrder";
 
 const { Step } = Steps;
 
-const PlaceOrder = () => {
+const PlaceOrder = ({setOpened}) => {
   const [formdata, setFormdata] = useState({ name: "", phone: "", address: "", payment: "cash" });
   const [error, setError] = useState("");
   const [form] = Form.useForm();
@@ -22,6 +22,7 @@ const PlaceOrder = () => {
   const handleOnFinish = () => {
     console.log(formdata);
     message.success("Order Placed Successfully");
+    setOpened(false);
   }
 
   const steps = [
