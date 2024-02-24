@@ -24,7 +24,10 @@ const splidestyle = { aspectRatio: '9/16', objectFit: 'contain',maxHeight:"370px
 const ScrollCards = () => (
    
   <div style={{marginLeft:'10px',marginTop:'10px'}}>
-  <Splide options={{
+  <Splide
+  transition={'ease-in-out'}
+  options={{
+    easing: 'ease-in-out',
     width: '100%',
     height:"50%",
     interval: 2500,
