@@ -43,7 +43,7 @@ const SignupPage = () => {
     }
     
     return (
-        <div>
+        <div style={{backgroundColor:'#FFF5F5'}}>
             <Navbar/>
             <Row justify="center" align="middle" style={{ minHeight: '100vh' }}>
                 <Col span={8}>

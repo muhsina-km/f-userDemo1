@@ -26,7 +26,7 @@ const Category = () => {
 
 
   return (
-    <div>
+    <div style={{backgroundColor:'#FFF5F5'}}>
       <Navbar />
       <Breadcrumb style={{ marginBottom: '-80px', marginTop: '100px',marginLeft:'50px' }}>
           <Breadcrumb.Item>

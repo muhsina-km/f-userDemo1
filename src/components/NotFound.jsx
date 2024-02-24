@@ -13,7 +13,7 @@ const NotFound = () => {
     }
 
   return (
-    <div>
+    <div style={{backgroundColor:'#FFF5F5'}}>
         <Row style={{textAlign: 'center', alignItems: 'center', justifyContent: 'center', height: '100vh',width:'100vw' }}>
             <Col span={24} >
         <Player

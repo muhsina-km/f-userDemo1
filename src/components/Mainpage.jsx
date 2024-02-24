@@ -11,7 +11,7 @@ const Mainpage = () => {
 
     return (
         // <div style={{alignItems:'center', display:'flex'}} >
-          <div>
+          <div style={{backgroundColor:'#FFF5F5'}}>
             <Navbar />
            <br /> <br />
            <Row>

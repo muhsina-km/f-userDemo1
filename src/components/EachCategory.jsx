@@ -46,7 +46,7 @@ const EachCategory = () => {
 
 
   return (
-    <div>
+    <div style={{backgroundColor:'#FFF5F5'}}>
       <Navbar />
       {Plantdetailsview.length > 0 && (
         <>

@@ -47,10 +47,10 @@ const Navbar = () => {
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="fixed" sx={{ backgroundColor: '#FFFFFF' }}>
+        <AppBar position="fixed" sx={{ backgroundColor: '#ED596B' }}>
           <Toolbar>
             <LocalFloristIcon sx={{
-              fontSize: 26, color: '#000000'
+              fontSize: 26, color: '#FFFFFF'
             }} /> &nbsp;
             <Typography
               variant='h6'
@@ -58,7 +58,7 @@ const Navbar = () => {
               sx={{
                 flexGrow: 1,
                 fontFamily: 'Cursive',
-                color: '#000000',
+                color: '#FFFFFF',
                 fontSize: '26px',
               }}
             >

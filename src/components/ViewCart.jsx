@@ -47,7 +47,7 @@ const ViewCart = () => {
     }, []); 
     
   return (
-    <div>
+    <div style={{backgroundColor:'#FFF5F5'}}>
         <Navbar/>
         <Breadcrumb style={{ marginLeft:'60px', marginTop:'80px', marginBottom:'-110px' }}>
           <Breadcrumb.Item>

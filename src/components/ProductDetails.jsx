@@ -112,7 +112,7 @@ useEffect(() => {
 
 
   return (
-    <div>
+    <div style={{backgroundColor:'#FFF5F5'}}>
       <Navbar/>
       <Breadcrumb style={{ marginLeft:'60px', marginTop:'90px', marginBottom:'-30px' }}>
           <Breadcrumb.Item>

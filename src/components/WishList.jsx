@@ -35,7 +35,7 @@ const email = user ? JSON.parse(user).email : null;
 
 
   return (
-    <div>
+    <div style={{backgroundColor:'#FFF5F5'}}>
       <Navbar/>
       <Breadcrumb style={{ marginLeft:'60px', marginTop:'100px', marginBottom:'-80px' }}>
           <Breadcrumb.Item>
