@@ -27,10 +27,11 @@ const ScrollCards = () => (
   <Splide
   transition={'ease-in-out'}
   options={{
-    easing: 'ease-in-out',
+    // easing: 'ease-in-out',
+    easingFunc: 'cubic-bezier(0.68, -0.55, 0.27, 1.55)',
     width: '100%',
     height:"50%",
-    interval: 2500,
+    interval: 2800,
     rewind: true,
     perPage: 2,
     gap: '1rem',
