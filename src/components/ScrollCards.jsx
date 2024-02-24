@@ -27,7 +27,7 @@ const ScrollCards = () => (
   <Splide options={{
     width: '100%',
     height:"50%",
-    // autoWidth: true,
+    interval: 1000,
     rewind: true,
     perPage: 2,
     gap: '1rem',
