@@ -1,9 +1,12 @@
 import React from 'react';
-import { Form, Input } from 'antd';
+import { Form, Input, Select } from 'antd';
+import districts from '../data/districts.json'; // Import the districts JSON file
 
-const OrderDetailsForm = ({form, onFinish, values }) => {
+const { Option } = Select;
+
+const OrderDetailsForm = ({ form, onFinish, values }) => {
   const handleValuesChange = (changedValues, allValues) => {
-    onFinish(allValues); 
+    onFinish(allValues);
   };
 
   return (
@@ -25,7 +28,7 @@ const OrderDetailsForm = ({form, onFinish, values }) => {
       <Form.Item
         label="Phone Number"
         name="phone"
-        rules={[{required: true, message: 'Please input your phone number!' }]}
+        rules={[{ required: true, message: 'Please input your phone number!' }]}
       >
         <Input />
       </Form.Item>
@@ -36,6 +39,25 @@ const OrderDetailsForm = ({form, onFinish, values }) => {
         rules={[{ required: true, message: 'Please input your address!' }]}
       >
         <Input.TextArea />
+      </Form.Item>
+
+      <Form.Item
+        label="District"
+        name="district"
+        rules={[{ required: true, message: 'Please select your district!' }]}
+      >
+        <Select
+          placeholder="Select district"
+          showSearch
+          optionFilterProp="children"
+          filterOption={(input, option) =>
+            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+          }
+        >
+          {districts.districts.map((district, index) => (
+            <Option key={index} value={district}>{district}</Option>
+          ))}
+        </Select>
       </Form.Item>
     </Form>
   );
