@@ -4,6 +4,7 @@ import OrderDetailsForm from "../forms/OrderDetailsForm";
 import SelectPayment from "../forms/SelectPayment";
 import { IdcardOutlined, CheckCircleOutlined, CreditCardOutlined } from "@ant-design/icons";
 import ConfirmOrder from "../forms/ConfirmOrder";
+import axios from "axios";
 
 const { Step } = Steps;
 
@@ -21,11 +22,24 @@ const PlaceOrder = ({setOpened}) => {
       email: email,
     });
   };
-  const handleOnFinish = () => {
-    console.log(formdata);
-    message.success("Order Placed Successfully");
-    setOpened(false);
-  }
+
+  const handleOnFinish = async () => {
+    try {
+      console.log('formdata:', formdata);
+      const response = await 
+      axios.post('http://localhost:4005/order/place-order', formdata);
+      console.log('Bakend Response:',response.data);
+      if (response.status === 201) {
+        message.success("Order Placed Successfully");
+        setOpened(false);
+      } else {
+        message.error("Failed to place order");
+      }
+    } catch (error) {
+      console.error("Error placing order:", error);
+      message.error("Failed to place order");
+    }
+  };
 
   const steps = [
     {
@@ -44,7 +58,8 @@ const PlaceOrder = ({setOpened}) => {
       content: <ConfirmOrder formdata={formdata} />,
     },
   ];
-  const { token } = theme.useToken();
+  // const { token } = theme.useToken();
+  const token = {};
   const [current, setCurrent] = useState(0);
   const next = async () => {
     try {
