@@ -25,10 +25,8 @@ const ScrollCards = () => (
    
   <div style={{marginLeft:'10px',marginTop:'10px'}}>
   <Splide
-  transition={'ease-in-out'}
   options={{
     easing: 'ease-in-out',
-    easingFunc: 'cubic-bezier(0.68, -0.55, 0.27, 1.55)',
     width: '100%',
     height:"50%",
     interval: 2800,
@@ -43,7 +41,7 @@ const ScrollCards = () => (
   // style={{background: 'white'}}
   >
 
-    <SplideSlide style={splidestyle}>
+    <SplideSlide style={splidestyle} >
       <img src="https://img.freepik.com/premium-photo/top-view-bouquet-pink-roses-with-copy-space_23-2148268370.jpg?w=740" 
       style={imgstyle} />
 
