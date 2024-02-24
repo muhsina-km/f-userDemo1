@@ -12,6 +12,7 @@ import { useState } from "react";
 import EachCategory from "./components/EachCategory";
 import WishList from "./components/WishList";
 import PlaceOrder from "./components/PlaceOrder";
+import LandingPage from "./components/LandingPage";
 
 function App() {
 
@@ -22,7 +23,8 @@ function App() {
       
       <BrowserRouter>
       <Routes>
-      <Route path="/" element={<Mainpage/>}></Route>
+      <Route path="/" element={<LandingPage/>}></Route>
+      <Route path="/mainpage" element={<Mainpage/>}></Route>
       <Route path="/home" element={<Home/>}></Route>
       <Route path="/favorites" element={<WishList/>}></Route>
       <Route path="/cart" element={<ViewCart/>}></Route>
