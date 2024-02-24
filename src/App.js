@@ -12,7 +12,6 @@ import { useState } from "react";
 import EachCategory from "./components/EachCategory";
 import WishList from "./components/WishList";
 import PlaceOrder from "./components/PlaceOrder";
-import Location from "./components/Location";
 
 function App() {
 
@@ -35,7 +34,6 @@ function App() {
       <Route path="/categories" element={<Category/>}></Route>
       <Route path="/products/:category" element={<EachCategory/>}></Route>
       <Route path="/Order" element={<PlaceOrder/>}></Route>
-      <Route path="/location" element={<Location/>}></Route>
       </Routes>
       </BrowserRouter>
 

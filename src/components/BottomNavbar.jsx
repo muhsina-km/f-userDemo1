@@ -5,7 +5,6 @@ import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import HomeIcon from '@mui/icons-material/Home';
 import GridViewRoundedIcon from '@mui/icons-material/GridViewRounded';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import { Link } from 'react-router-dom';
 
@@ -29,7 +28,6 @@ export default function SimpleBottomNavigation({nowin}) {
         <BottomNavigationAction component={Link} to="/home" label="Home" icon={<HomeIcon />} />
         <BottomNavigationAction component={Link} to="/categories" label="Categories" icon={<GridViewRoundedIcon />} />
         <BottomNavigationAction component={Link} to="/favorites" label="Favorites" icon={<FavoriteIcon />} />
-        <BottomNavigationAction component={Link} to="/location" label="Location" icon={<LocationOnIcon />} />
         <BottomNavigationAction component={Link} to="/Order" label="Orders" icon={<AssignmentTurnedInIcon />} />
       </BottomNavigation>
     </Box>

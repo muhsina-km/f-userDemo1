@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form, message, Steps, theme } from "antd";
+import { Button, Form, message, notification, Steps, theme } from "antd";
 import OrderDetailsForm from "../forms/OrderDetailsForm";
 import SelectPayment from "../forms/SelectPayment";
 import { IdcardOutlined, CheckCircleOutlined, CreditCardOutlined } from "@ant-design/icons";
@@ -30,7 +30,13 @@ const PlaceOrder = ({setOpened}) => {
       axios.post('http://localhost:4005/order/place-order', formdata);
       console.log('Bakend Response:',response.data);
       if (response.status === 201) {
-        message.success("Order Placed Successfully");
+        //message.success("Order Placed Successfully");
+          notification.open({
+            type: 'success',
+            message: 'Order Placed successfully',
+            description: 'Thank you for shopping with us',
+            placement: 'top',
+          })
         setOpened(false);
       } else {
         message.error("Failed to place order");

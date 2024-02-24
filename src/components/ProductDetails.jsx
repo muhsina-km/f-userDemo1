@@ -8,6 +8,7 @@ import { ArrowLeftOutlined, HeartOutlined, HeartFilled } from "@ant-design/icons
 import SmallSlider from "./SmallSlider";
 import AddToCart from "../popups/AddToCart";
 import { addToWishlist, viewWishlist, removeFromWishlist, isInWishlist } from "../functions/wishlistApi";
+import Navbar from "./Navbar";
 
 const ProductDetails = () => {
   const { plantid } = useParams();
@@ -18,23 +19,6 @@ const ProductDetails = () => {
   const { Text, Title, Paragraph } = Typography;
   const [Plantdetailsview, setPlantdetailsview] = useState();
   const [similarproducts, setSimilarproducts] = useState([]);
-
-  //order
-  const [isModalVisiblee, setIsModalVisiblee] = useState(false);
-
-  const handleBuyNow = async (plantid) => {
-    const userId = localStorage.getItem("user");
-      try {
-        const response = await 
-        axios.post(`${baseurl}/order/place-order`, { userId, products: [plantid] });
-        console.log(response.data);
-        notification.success({ message: 'Order placed successfully', placement: 'topLeft' });
-        setIsModalVisiblee(false);
-      } catch (error) {
-        console.error('Error placing order:', error);
-        notification.error({ message: 'Error placing order', placement: 'topLeft' });
-      }
-  };
 
 
   const [wishlist, setWishlist] = useState([]);
@@ -118,19 +102,19 @@ useEffect(() => {
     setIsModalVisible(false);
   }
 
-//  const handleBuyNow = () => {
-//    notification.open({
-//      type: 'success',
-//      message: 'Order Placed successfully',
-//      description: 'Thank you for shopping with us',
-//      placement: 'topLeft',
-//    })
-//  }
+ const handleBuyNow = () => {
+   notification.open({
+     type: 'warning',
+     message: 'Add items to cart for Purchase',
+     placement: 'topLeft',
+   })
+ }
 
 
   return (
     <div>
-      <Breadcrumb style={{ marginLeft:'60px', marginTop:'20px', marginBottom:'-30px' }}>
+      <Navbar/>
+      <Breadcrumb style={{ marginLeft:'60px', marginTop:'90px', marginBottom:'-30px' }}>
           <Breadcrumb.Item>
             <Link to='/home'>Home</Link>
           </Breadcrumb.Item>
@@ -175,7 +159,7 @@ useEffect(() => {
           <Paragraph>Description: {Plantdetailsview.description}</Paragraph>
           <br />
           <Space>
-            <Button type="primary" shape="round" size={"medium"} onClick={() => handleBuyNow()}>
+            <Button type="primary" shape="round" size={"medium"} onClick={handleBuyNow}>
               Buy Now
             </Button>
             <Button type="primary" shape="round" size={"medium"} onClick={() => setIsModalVisible(true)}>
@@ -190,7 +174,9 @@ useEffect(() => {
       </Row>
       {/* You can display other details of the product */}
   
-<Divider orientation="left"><h3>Similar Plants</h3></Divider>
+<Divider orientation="left" style={{marginTop:'-20px' }}>
+  <h3>Similar Plants</h3>
+  </Divider>
       <SmallSlider products={similarproducts}></SmallSlider>
       <Modal
         footer={null}

@@ -1,60 +1,58 @@
-import { Button } from '@mui/material'
-import { Card } from 'antd'
-import Meta from 'antd/es/card/Meta'
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
 import './Style.css'
+import axios from 'axios'
+import baseurl from '../Api'
+import { Card, Button, Row } from 'antd';
+import Meta from 'antd/es/card/Meta'
+import { useNavigate } from 'react-router-dom'
 
-const PlanttypeCard = () => {
+const PlantCard = () => {
+
+  const [Ptype, setPtype] = useState([]);
+  const [animationCompleted, setAnimationCompleted] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get(baseurl + '/planttype/ptview')
+      .then((response) => {
+        console.log(response.data);
+        setPtype(response.data);
+      })
+      .catch((err) => console.log(err));
+    setAnimationCompleted(true);
+  }, []);
+
+  const DisplayProducts = Ptype.slice(0, 4);
+
+ const ViewAll = () => {
+  navigate('/home');
+ }
+
   return (
-
     <div>
-      <Button component={Link} to="/categories"
-      style={{ color: 'black', marginLeft: '1120px', }}>
-        View All</Button>
+     <Button type="text" style={{ marginLeft: '1120px', marginTop: '-40px', }} 
+     onClick={ViewAll}>
+        VIEW ALL</Button>
 
-    <div className='ptcard-grid'
-    style={{ display: 'grid', justifyContent: 'center', padding: '10px' }}>
+      <div className='product-grid'
+    style={{ display: 'grid', justifyContent: 'center', padding: '10px',marginTop:'0px' }}>
 
-      <Card
-        hoverable
-        style={{ width: 240, margin: '16px' }}
-        cover={<img alt="plant" src="https://img.freepik.com/free-photo/close-up-blooming-lilies_1160-235.jpg?w=996&t=st=1707825094~exp=1707825694~hmac=ff02b298878204dd0651fabd4cbb7a6b5c54c09583ec02325c3b069e84164f4a"
-          style={{ height: '150px', objectFit: 'cover' }} />}
-      >
-        <Meta title="Lily" style={{ textAlign: 'center' }} />
-      </Card>
-
-      <Card
-        hoverable
-        style={{ width: 240, margin: '16px' }}
-        cover={<img alt="plant" src="https://img.freepik.com/free-vector/mixed-dahlia-flowers_53876-80665.jpg?w=740&t=st=1707826895~exp=1707827495~hmac=e6531473d04a952e34a2b323118e4c38d89382512168008088291ef35a994ea9"
-          style={{ height: '150px', objectFit: 'cover' }} />}
-      >
-        <Meta title="Dahlia" style={{ textAlign: 'center' }} />
-      </Card>
-
-      <Card
-        hoverable
-        style={{ width: 240, margin: '16px' }}
-        cover={<img alt="plant" src="https://img.freepik.com/free-photo/green-branch-with-pink-flowers_23-2147699509.jpg?w=740&t=st=1707827200~exp=1707827800~hmac=dac4268224bda23586a9a548692485f7610be79c9647c749a5edf0f2a2b8ff72"
-          style={{ height: '150px', objectFit: 'cover' }} />}
-      >
-        <Meta title="Bougainvillea" style={{ textAlign: 'center' }} />
-      </Card>
-
-      <Card
-        hoverable
-        style={{ width: 240, margin: '16px' }}
-        cover={<img alt="plant" src="https://img.freepik.com/free-photo/side-view-red-color-roses-isolated-white-background_141793-8621.jpg?w=996&t=st=1707827385~exp=1707827985~hmac=3b312d9f2019ab89bdac3225ebed0746c1bd5b7df8f7ad1e0365f0b575a95c38"
-          style={{ height: '150px', objectFit: 'cover' }} />}
-      >
-        <Meta title="Rose" style={{ textAlign: 'center' }} />
-      </Card>
-
-    </div>
-    </div>
+          {DisplayProducts.map((Ptype, index) => (
+            <Card
+              key={Ptype.id}
+              hoverable
+              style={{ width: 240, margin: '16px' }}
+              cover={<img alt="plant" src={Ptype.Planttypephoto} style={{ height: '150px', objectFit: 'cover' }} />}
+            >
+              <Meta style={{textAlign:'center'}} title={Ptype.Planttype} />
+              <Button type="primary" style={{ marginTop: '8px', marginLeft: '60px' }}>
+                View</Button>
+            </Card>
+          ))}
+      </div>
+     </div>
   )
 }
 
-export default PlanttypeCard
+export default PlantCard

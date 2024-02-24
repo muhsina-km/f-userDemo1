@@ -49,7 +49,7 @@ const ViewCart = () => {
   return (
     <div>
         <Navbar/>
-        <Breadcrumb style={{ marginLeft:'60px', marginTop:'100px', marginBottom:'-110px' }}>
+        <Breadcrumb style={{ marginLeft:'60px', marginTop:'80px', marginBottom:'-110px' }}>
           <Breadcrumb.Item>
             <Link to='/home'>Home</Link>
           </Breadcrumb.Item>
@@ -58,9 +58,8 @@ const ViewCart = () => {
           </Breadcrumb.Item>
         </Breadcrumb>
 
-        <h2 style={{marginTop:'80px', textAlign:'center'}}>Cart Items</h2>
+        <h2 style={{marginTop:'100px', textAlign:'center'}}>Cart Items</h2>
         <Row
-        justify="center"
         style={{marginTop:'10px'}} gutter={16}>
                 {cart.map((item, index) => (
                     <motion.div
@@ -73,8 +72,11 @@ const ViewCart = () => {
                     </Col></motion.div>
                 ))}
         </Row>
+        <Row>
+            <br /> <br /> <br /> <br />
+        </Row>
         <Footer style={{borderTop:'1px solid #E2E2E2',alignItems:'center', 
-                        height: '70px',textAlign: 'center',position: 'fixed', 
+                        height: '60px',textAlign: 'center',position: 'fixed', 
                         bottom: '0', width: '100%',display:'flex',justifyContent:'space-between' }}>
             <h3>Total Price:₹<CountUp end={total} /></h3>
             <Button onClick={() => setIsPlaceOpen(true)} type="primary" icon={<ShoppingCartOutlined />}>

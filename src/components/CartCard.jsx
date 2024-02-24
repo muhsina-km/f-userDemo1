@@ -6,7 +6,9 @@ import baseurl from '../Api';
 const CartCard = ({data}) => {
     const count = parseInt(data.quantity);
   return (
-    <Card hoverable style={{width:'200px'}}>
+    <Card 
+    hoverable 
+    style={{width:'230px', marginLeft:'auto', marginRight:'auto' }}>
         {data?(<><Row>
             <Col span={24}>
         <img src={data.plantphoto} style={{width:'100%'}} alt="plant" />

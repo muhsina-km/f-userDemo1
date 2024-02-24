@@ -14,8 +14,10 @@ const handleLinkClick = () => {
 
 const ProductCard = ({ id,productName, imageUrl,ofPrice,orPrice }) => (
   <Card
+  hoverable
     style={{
       width: 150,
+      marginBottom: "50px",
     }}
     cover={
       <div style={{ width: "150px", height: "150px" }}>

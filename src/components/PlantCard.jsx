@@ -1,59 +1,59 @@
-import { Button } from '@mui/material'
-import { Card } from 'antd'
-import Meta from 'antd/es/card/Meta'
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
 import './Style.css'
+import axios from 'axios'
+import baseurl from '../Api'
+import { Card, Button, Row } from 'antd';
+import Meta from 'antd/es/card/Meta'
+import { useNavigate } from 'react-router-dom'
 
 const PlantCard = () => {
+
+  const [Plantdetailsview, setPlantdetailsview] = useState([]);
+  const [trigger, setTrigger] = useState(false);
+  const [animationCompleted, setAnimationCompleted] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get(baseurl + "/plantdetails/pview")
+      .then((response) => {
+        console.log(response.data);
+        setPlantdetailsview(response.data);
+      })
+      .catch((err) => console.log(err));
+
+    setAnimationCompleted(true);
+  }, [trigger]);
+
+  const DisplayProducts = Plantdetailsview.slice(0, 4);
+
+ const ViewAll = () => {
+  navigate('/home');
+ }
+
   return (
-
     <div>
-      <Button component={Link} to="/home"
-      style={{ color: 'black', marginLeft: '1120px', }}>
-        View All</Button>
+     <Button type="text" style={{ marginLeft: '1120px', marginTop: '-40px', }} 
+     onClick={ViewAll}>
+        VIEW ALL</Button>
 
-    <div className='ptcard-grid'
-    style={{ display: 'grid', justifyContent: 'center', padding: '10px' }}>
+      <div className='product-grid'
+    style={{ display: 'grid', justifyContent: 'center', padding: '10px',marginTop:'0px' }}>
 
-      <Card
-        hoverable
-        style={{ width: 240, margin: '16px' }}
-        cover={<img alt="plant" src="https://i.pinimg.com/564x/10/ac/22/10ac22c5a19469f04ae2bbd0245ccdb4.jpg"
-          style={{ height: '150px', objectFit: 'cover' }} />}
-      >
-        <Meta title="Phalaenopsis amabilis Orchid" style={{ textAlign: 'center' }} />
-      </Card>
-
-      <Card
-        hoverable
-        style={{ width: 240, margin: '16px' }}
-        cover={<img alt="plant" src="https://i.pinimg.com/736x/c1/ad/48/c1ad485aeefcc2cdfa23c3150c1fcf46.jpg"
-          style={{ height: '150px', objectFit: 'cover' }} />}
-      >
-        <Meta title="Hawaiian Hibiscus" style={{ textAlign: 'center' }} />
-      </Card>
-
-      <Card
-        hoverable
-        style={{ width: 240, margin: '16px' }}
-        cover={<img alt="plant" src="https://i.pinimg.com/564x/11/7c/03/117c031f420a4926db5a5f40e52d9d87.jpg"
-          style={{ height: '150px', objectFit: 'cover' }} />}
-      >
-        <Meta title="Acropolis Tulip" style={{ textAlign: 'center' }} />
-      </Card>
-
-      <Card
-        hoverable
-        style={{ width: 240, margin: '16px' }}
-        cover={<img alt="plant" src="https://i.pinimg.com/564x/1d/2d/34/1d2d34351b3ad95a7df7862807ed78cb.jpg"
-          style={{ height: '150px', objectFit: 'cover' }} />}
-      >
-        <Meta title="Easter Parade Bougainvillea" style={{ textAlign: 'center' }} />
-      </Card>
-
-    </div>
-    </div>
+          {DisplayProducts.map((Plantdetailsview, index) => (
+            <Card
+              key={Plantdetailsview.id}
+              hoverable
+              style={{ width: 240, margin: '16px' }}
+              cover={<img alt="plant" src={Plantdetailsview.plantphoto} style={{ height: '150px', objectFit: 'cover' }} />}
+            >
+              <Meta style={{textAlign:'center'}} title={Plantdetailsview.plantname} />
+              <Button type="primary" style={{ marginTop: '8px', marginLeft: '60px' }}>
+                View</Button>
+            </Card>
+          ))}
+      </div>
+     </div>
   )
 }
 
