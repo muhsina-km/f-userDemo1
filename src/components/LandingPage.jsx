@@ -16,7 +16,7 @@ const LandingPage = () => {
       setTimeout(() => {
         // Redirect to the main page
         navigate('/mainpage'); // Replace with the actual path
-      }, 4000);
+      }, 2500);
     };
 
     animateOnLoad();
