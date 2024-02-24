@@ -49,7 +49,7 @@ const Category = () => {
               style={{ width: 240, margin: '16px' }}
               cover={<img alt='plant' src={Ptype.Planttypephoto} style={{ height: '180px', objectFit: 'cover' }} />}
             >
-              <Meta title={Ptype.Planttype} style={{ textAlign: 'center' }} />
+              <Meta title={Ptype.Planttype} />
               <Link to={`/products/${Ptype.Planttype}`}>
                 <Button type="primary" style={{ marginTop: '8px' }}>
                   Explore Products
