@@ -23,7 +23,7 @@ const splidestyle = { aspectRatio: '9/16', objectFit: 'contain',maxHeight:"370px
 
 const ScrollCards = () => (
    
-  <div>
+  <div style={{marginLeft:'10px',marginTop:'10px'}}>
   <Splide options={{
     width: '100%',
     height:"50%",
@@ -33,6 +33,7 @@ const ScrollCards = () => (
     gap: '1rem',
     arrows: false,
     // perMove: 1,
+    autoplay: true,
     pagination: true,
   }}
   // style={{background: 'white'}}
