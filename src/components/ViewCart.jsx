@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
-import { Breadcrumb, Button, Card, Col, Row } from 'antd'
+import { Breadcrumb, Button, Card, Col, Modal, Row } from 'antd'
 import axios from 'axios'
 import CartCard from './CartCard'
 import {motion} from 'framer-motion';
@@ -8,9 +8,11 @@ import { Footer } from 'antd/es/layout/layout'
 import { ShoppingCartOutlined } from '@ant-design/icons'
 import CountUp from 'react-countup'
 import { Link } from 'react-router-dom'
+import PlaceOrder from '../popups/PlaceOrder'
 
 const ViewCart = () => {
     const [cart, setCart] = useState([])
+    const [isPlaceOpen, setIsPlaceOpen] = useState(false)
     const [total, setCartTotal] = useState(0)
     const [animationCompleted, setAnimationCompleted] = useState(false);
     const email = localStorage.getItem('user');
@@ -75,9 +77,18 @@ const ViewCart = () => {
                         height: '70px',textAlign: 'center',position: 'fixed', 
                         bottom: '0', width: '100%',display:'flex',justifyContent:'space-between' }}>
             <h3>Total Price:₹<CountUp end={total} /></h3>
-            <Button type="primary" icon={<ShoppingCartOutlined />}>
+            <Button onClick={() => setIsPlaceOpen(true)} type="primary" icon={<ShoppingCartOutlined />}>
                 Place Order
                 </Button></Footer>
+                <Modal
+                width={700}
+                title="Place Order"
+                open={isPlaceOpen}
+                footer={null}
+                onCancel={() => setIsPlaceOpen(false)}
+                >
+                    <PlaceOrder/>
+                </Modal>
         </div>
   )
 }
