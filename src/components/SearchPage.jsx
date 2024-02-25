@@ -45,7 +45,7 @@ const SearchPage = () => {
     )
   }
   return (
-    <div>
+    <div style={{backgroundColor:'#FFF5F5', paddingTop:'4px'}}>
       <Navbar/>
       {Plantdetailsview && (<>
      <Divider style={{marginBottom:'-100px',marginTop:'100px'}} orientation='left'><h2>Search Results</h2></Divider>

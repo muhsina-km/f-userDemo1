@@ -30,7 +30,7 @@ const Home = () => {
 
 
   return (
-    <div style={{ backgroundColor: '#FFF5F5' }}>
+    <div style={{backgroundColor:'#FFF5F5', paddingTop:'4px'}}>
       <Navbar/>
      
           <div className='product-grid'>
