@@ -9,6 +9,8 @@ import echo from '../assets/echo.png'
 import thanku from '../assets/thankyou.webp'
 import { Col, Divider, Row } from 'antd';
 import Navbar from './Navbar';
+import { Parallax, ParallaxProvider } from 'react-scroll-parallax';
+import { speed } from 'jquery';
 
 const AboutPage = () => {
 
@@ -19,12 +21,13 @@ const AboutPage = () => {
   return (
     <div>
       <Navbar />
+      <ParallaxProvider>
       <motion.div
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 50 }}
       transition={{ duration: 0.5 }}
-      style={{ margin: '50px' }}
+      style={{ margin: '50px',marginLeft:'200px' }}
     >
       <Divider orientation='left' style={{ marginTop: '70px' }}> <h3 id='About'>About Us</h3>  </Divider>
       <Fade triggerOnce>
@@ -32,7 +35,9 @@ const AboutPage = () => {
       </Fade>
       <Row>
         <Col span={6}>
+          <Parallax translateX={[-40, 0]}>
           <img src={redrose} style={{ width: '250px' }} alt="flower" />
+          </Parallax>
         </Col>
         <Col span={12}>
           <Fade delay={100} triggerOnce>
@@ -52,13 +57,17 @@ const AboutPage = () => {
               BloomingBuds was born out of this dream, growing from a small seedling of an idea to a flourishing online marketplace.</p>
           </Col>
           <Col span={6}>
+          <Parallax translateX={[30, 0]}>
             <img src={shop} style={{ width: '250px' }} alt="flower" />
+            </Parallax>
           </Col></Row></Fade>
 
       <Fade delay={400} triggerOnce>
         <Row>
           <Col span={6}>
+          <Parallax translateX={[-40, 0]}>
             <img src={delivery} style={{ width: '250px' }} alt="flower" />
+            </Parallax>
           </Col>
           <Col span={14}><h2>Our Commitment</h2>
             <p style={{ marginRight: '20px', marginTop: '20px', textAlign: 'justify', fontSize: '18px', lineHeight: '1.5', fontFamily: 'sans-serif' }}>
@@ -68,7 +77,7 @@ const AboutPage = () => {
           </Col>
           </Row></Fade>
 
-          <Fade delay={600} triggerOnce>
+          <Fade delay={400} triggerOnce>
         <Row>
           <Col span={14}><h2>The Blooming Experience</h2>
             <p style={{ marginRight: '20px', marginTop: '20px', textAlign: 'justify', fontSize: '18px', lineHeight: '1.5', fontFamily: 'sans-serif' }}>
@@ -77,13 +86,17 @@ const AboutPage = () => {
           plant enthusiast or a beginner, BloomingBuds is here to inspire and guide you on your journey with nature.</p>
           </Col>
           <Col span={6}>
+          <Parallax translateX={[30, 0]}>
             <img src={plant} style={{ width: '250px' }} alt="flower" />
+            </Parallax>
           </Col></Row></Fade>
 
-          <Fade delay={800} triggerOnce>
+          <Fade delay={400} triggerOnce>
         <Row>
           <Col span={6}>
+          <Parallax translateX={[-40, 0]}>
             <img src={echo} style={{ width: '250px' }} alt="flower" />
+            </Parallax>
           </Col>
           <Col span={14}><h2>Sustainability Matters</h2>
             <p style={{ marginRight: '20px', marginTop: '20px', textAlign: 'justify', fontSize: '18px', lineHeight: '1.5', fontFamily: 'sans-serif' }}>
@@ -93,7 +106,7 @@ const AboutPage = () => {
           </Col>
           </Row></Fade>
 
-          <Fade delay={1000} triggerOnce>
+          <Fade delay={400} triggerOnce>
         <Row>
           <Col span={14}><h2>Let's Grow Together</h2>
             <p style={{ marginRight: '20px', marginTop: '20px', textAlign: 'justify', fontSize: '18px', lineHeight: '1.5', fontFamily: 'sans-serif' }}>
@@ -101,13 +114,16 @@ const AboutPage = () => {
           Explore our online garden, find the perfect flowering companion, and let the BloomingBuds experience unfold in your home.</p>
           </Col>
           <Col span={6}>
-            <img src={thanku} style={{ width: '250px' }} alt="flower" />
+          <Parallax translateX={[30, 0]}>
+            <img src={thanku} style={{ width: '220px' }} alt="flower" />
+            </Parallax>
           </Col></Row></Fade>
 
-      <Fade delay={1200} triggerOnce>
+      <Fade delay={400} triggerOnce>
         <h2>Welcome to BloomingBuds – Where Every Bloom Tells a Story.</h2>
       </Fade>
     </motion.div>
+    </ParallaxProvider>
     </div>
   );
 }
