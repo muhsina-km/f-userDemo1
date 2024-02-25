@@ -6,13 +6,11 @@ import BottomNavbar from './BottomNavbar';
 import Footer from './Footer';
 import { Breadcrumb, Card, Button, notification } from 'antd';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import Meta from 'antd/es/card/Meta';
 
 const OrderView = () => {
   const [orders, setOrders] = useState([]);
   const userId = localStorage.getItem('user');
-  const [animationCompleted, setAnimationCompleted] = useState(false);
 
   useEffect(() => {
     axios
@@ -26,6 +24,26 @@ const OrderView = () => {
       });
   }, [userId]);
 
+  const handleCancelOrder = async (orderId) => {
+    try {
+      const response = await 
+      axios.delete(`${baseurl}/order/remove-order/${orderId}`);
+      if (response.status === 200) {
+        console.log('Order canceled successfully');
+                notification.open({
+                    type: 'success',
+                    message: 'Order canceled successfully',
+                    placement: 'top',
+                })
+        setOrders((prevOrders) => prevOrders.filter((order) => order._id !== orderId));
+      } else {
+        console.error('Failed to cancel order', response.data.message);
+      }
+    } catch (error) {
+      console.error('Error cancelling order:', error);
+    }
+  }
+
   return (
     <div style={{ backgroundColor: '#FFF5F5', paddingTop: '4px' }}>
       <Navbar />
@@ -34,41 +52,34 @@ const OrderView = () => {
           <Link to='/home'>Home</Link>
         </Breadcrumb.Item>
         <Breadcrumb.Item>
-          <Link to='/place-order'>Orders</Link>
+          <Link to=''>orders</Link>
         </Breadcrumb.Item>
       </Breadcrumb>
 
       <div className='product-grid'>
-        {orders.map((order, index) => (
-          <motion.div
-            key={order._id} // Add a unique key for each order
-            initial={{ opacity: 0, y: 30 }}
-            animate={animationCompleted ? { opacity: 1, y: 0 } : {}}
-            transition={{ type: 'spring', delay: animationCompleted ? 0.1 * index : 0 }}
+        {orders.map((order) => (
+          <Card
+            key={order._id}
+            hoverable
+            style={{ width: 240, margin: '16px' }}
           >
-            <Card
-              hoverable
-              style={{ width: 240, margin: '16px' }}
-              // cover={<img alt="plant" src={order.items[0].plantphoto} style={{ height: '150px', objectFit: 'cover' }} />}
-            >
-              <Meta title={order.name} description={`Address: ${order.address}, District: ${order.district}`} />
-              <Meta title={`Payment: ${order.payment}`} description={`Phone: ${order.phone}`} />
+            <Meta title={order.name} />
+            <p>Address:{order.address}</p>
+            <p>Phone No: {order.phone}</p>
+            <p>District: {order.district}</p>
+            <p>Payment: {order.payment}</p>
 
-              <h3>Ordered Items:</h3>
-              {order.items.map((item) => (
-                <div key={item._id}>
-                  <p>Product ID: {item.productId}</p>
-                  <p>Quantity: {item.quantity}</p>
-                </div>
-              ))}
-
-              <Link to={`/view/${order.items[0].productId}`}>
-                <Button type="primary" style={{ marginTop: '8px' }}>
-                  Product Details
-                </Button>
-              </Link>
-            </Card>
-          </motion.div>
+            <h4>Ordered Items:</h4>
+            {order.items.map((item) => (
+              <div key={item._id}>
+                <p>Product ID: {item.productId}</p>
+                <p>Quantity: {item.quantity}</p>
+              </div>
+            ))}
+              <Button type="primary" danger style={{ marginTop: '8px' }} onClick={() => handleCancelOrder(order._id)}>
+                Cancel Order
+              </Button>
+          </Card>
         ))}
       </div>
 
