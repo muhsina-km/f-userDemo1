@@ -46,7 +46,7 @@ const Category = () => {
             <Card
               key={Ptype.id}
               hoverable
-              style={{ width: 240, margin: '16px' }}
+              style={{ width: 240, margin: '16px',boxShadow: 'rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px', }}
               cover={<img alt='plant' src={Ptype.Planttypephoto} style={{ height: '180px', objectFit: 'cover' }} />}
             >
               <Meta title={Ptype.Planttype} />

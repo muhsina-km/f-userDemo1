@@ -18,6 +18,7 @@ const ProductCard = ({ id,productName, imageUrl,ofPrice,orPrice }) => (
     style={{
       width: 150,
       marginBottom: "50px",
+      boxShadow: 'rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px',
     }}
     cover={
       <div style={{ width: "150px", height: "150px" }}>

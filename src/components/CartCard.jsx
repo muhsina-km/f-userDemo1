@@ -8,7 +8,7 @@ const CartCard = ({data}) => {
   return (
     <Card 
     hoverable 
-    style={{width:'230px', marginLeft:'auto', marginRight:'auto' }}>
+    style={{width:'230px', marginLeft:'auto', marginRight:'auto',boxShadow: 'rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px', }}>
         {data?(<><Row>
             <Col span={24}>
         <img src={data.plantphoto} style={{width:'100%'}} alt="plant" />
