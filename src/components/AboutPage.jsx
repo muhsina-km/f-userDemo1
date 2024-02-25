@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Fade } from 'react-awesome-reveal';
 import redrose from '../assets/flowerred3d.webp'
-import shop from '../assets/flowershop.webp'
+import shop from '../assets/plantshop.webp'
 import { Col, Row } from 'antd';
 
 const AboutPage = () => {
