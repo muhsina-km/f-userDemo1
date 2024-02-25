@@ -47,7 +47,7 @@ const Navbar = () => {
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="fixed" sx={{ backgroundColor: '#ED5945' }}>
+        <AppBar position="fixed" sx={{ backgroundColor: '#ED5945',boxShadow: 'none' }}>
           <Toolbar>
             <LocalFloristIcon sx={{
               fontSize: 26, color: '#FFFFFF'
