@@ -8,7 +8,7 @@ import axios from "axios";
 
 const { Step } = Steps;
 
-const PlaceOrder = ({setOpened}) => {
+const PlaceOrder = ({setOpened , cart}) => {
   const [formdata, setFormdata] = useState({ name: "", phone: "", address: "", payment: "cash" });
   const [error, setError] = useState("");
   const [form] = Form.useForm();
@@ -20,6 +20,7 @@ const PlaceOrder = ({setOpened}) => {
       ...formdata,
       ...values,
       email: email,
+      items: cart.map(items => ({ productId: items.productId, quantity: items.quantity })),
     });
   };
 

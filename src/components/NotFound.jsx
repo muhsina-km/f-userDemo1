@@ -9,7 +9,7 @@ const NotFound = () => {
     const navigate = useNavigate()
 
     const handleClick = () => {
-     navigate('-1')
+     navigate(-1)
     }
 
   return (

@@ -58,7 +58,7 @@ const PlantCard = () => {
             <Meta title={Plantdetailsview.plantname} />
             <Link to={`/view/${Plantdetailsview.plantid}`}
               onClick={handleLinkClick}>
-              <Button type="primary" icon={<EyeOutlined />}
+              <Button type="primary"
                 style={{ marginTop: '8px' }}>
                 Product Details
               </Button></Link>

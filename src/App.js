@@ -11,7 +11,7 @@ import ViewCart from "./components/ViewCart";
 import { useState } from "react";
 import EachCategory from "./components/EachCategory";
 import WishList from "./components/WishList";
-import PlaceOrder from "./components/PlaceOrder";
+import OrderView from "./components/OrderView";
 import LandingPage from "./components/LandingPage";
 
 function App() {
@@ -35,7 +35,7 @@ function App() {
       <Route path="/about" element={<AboutPage/>}></Route>
       <Route path="/categories" element={<Category/>}></Route>
       <Route path="/products/:category" element={<EachCategory/>}></Route>
-      <Route path="/Order" element={<PlaceOrder/>}></Route>
+      <Route path="/Order" element={<OrderView/>}></Route>
       </Routes>
       </BrowserRouter>
 

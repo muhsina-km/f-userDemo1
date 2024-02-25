@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Meta from 'antd/es/card/Meta';
 
-const PlaceOrder = () => {
+const OrderView = () => {
   const [orders, setOrders] = useState([]);
   const userId = localStorage.getItem('user');
   const [animationCompleted, setAnimationCompleted] = useState(false);
@@ -66,4 +66,4 @@ const PlaceOrder = () => {
   );
 };
 
-export default PlaceOrder;
+export default OrderView;

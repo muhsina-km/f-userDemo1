@@ -37,7 +37,7 @@ const SearchPage = () => {
 
   if(nothingFound){
     return (
-      <div>
+      <div style={{backgroundColor:'#FFF5F5', paddingTop:'4px'}}>
         <Navbar/>
         <NotFound/>
         <Footer/>
