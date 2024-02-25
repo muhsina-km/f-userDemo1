@@ -50,7 +50,7 @@ const CartCard = ({ data, removeFromCart }) => {
                                     onCancel={cancelRemove}
                                     okText="Yes"
                                     cancelText="No">
-                            <Button type="primary" danger size='small' onClick={() => removeFromCart(email, productId)}>
+                            <Button type="primary" danger size='small'>
                                 Remove from Cart
                             </Button>
                             </Popconfirm>

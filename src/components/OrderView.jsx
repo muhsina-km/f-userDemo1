@@ -4,7 +4,7 @@ import baseurl from '../Api';
 import Navbar from './Navbar';
 import BottomNavbar from './BottomNavbar';
 import Footer from './Footer';
-import { Breadcrumb, Card, Button, notification } from 'antd';
+import { Breadcrumb, Card, Button, notification, message, Popconfirm } from 'antd';
 import { Link } from 'react-router-dom';
 import Meta from 'antd/es/card/Meta';
 
@@ -12,6 +12,9 @@ const OrderView = () => {
   const [orders, setOrders] = useState([]);
   const userId = localStorage.getItem('user');
 
+const cancelRemove = () => {
+    message.info('Cancelled removing item from cart');
+}
   useEffect(() => {
     axios
       .get(`${baseurl}/order/fetch-orders`)
@@ -76,9 +79,17 @@ const OrderView = () => {
                 <p>Quantity: {item.quantity}</p>
               </div>
             ))}
-              <Button type="primary" danger style={{ marginTop: '8px' }} onClick={() => handleCancelOrder(order._id)}>
+            <Popconfirm
+              title="Are you sure you want to cancel this order?"
+              onConfirm={() => handleCancelOrder(order._id)}
+              onCancel={cancelRemove}
+              okText="Yes"
+              cancelText="No"
+            >
+              <Button type="primary" danger style={{ marginTop: '8px' }}>
                 Cancel Order
               </Button>
+              </Popconfirm>
           </Card>
         ))}
       </div>

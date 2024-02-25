@@ -85,7 +85,7 @@ const ViewCart = () => {
     }
 
     return (
-        <div style={{ backgroundColor: '#FFF5F5', paddingTop: '4px' }}>
+        <div style={{ backgroundColor: '#FFF5F5', paddingTop: '4px',minHeight:"100vh" }}>
             <Navbar />
             <Breadcrumb style={{ marginLeft: '60px', marginTop: '80px', marginBottom: '-110px' }}>
                 <Breadcrumb.Item>
