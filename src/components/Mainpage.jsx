@@ -23,9 +23,6 @@ const Mainpage = () => {
            <br /> <br />
            <Divider orientation='left'><h3>Available Plants</h3></Divider>
            <Row style={{marginBottom:'0px', marginTop:'0px', }}><PlantCard/></Row>
-           <br /> <br />
-           <Divider orientation='left'> <h3 id='About'>About Us</h3>  </Divider>
-           <Row style={{marginBottom:'0px', marginTop:'0px', }}><AboutPage/></Row>
           </Row>
             <Footer/>
         </div>

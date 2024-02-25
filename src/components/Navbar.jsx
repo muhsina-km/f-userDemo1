@@ -79,7 +79,7 @@ const Navbar = () => {
               <Button type='text' style={{ fontSize: '14px', color: '#FFFFFF' }} component={Link} to="/home" onClick={scrollToTop}>
                 SHOP</Button>
               <ScrollLink to="About" smooth={true} duration={500}>
-                <Button  type='text' style={{ fontSize: '14px', cursor: 'pointer', color: '#FFFFFF' }}>
+                <Button  type='text' style={{ fontSize: '14px', cursor: 'pointer', color: '#FFFFFF' }} component={Link} to="/about">
                   ABOUT</Button></ScrollLink>
               &nbsp; &nbsp; &nbsp;
               <Button style={{ fontSize: '14px' }} component={Link} to="/cart">
