@@ -58,11 +58,6 @@ const ViewCart = () => {
             console.log('Remove from cart', response);
             if (response.status === 200) {
                 console.log('Item removed from cart');
-                notification.open({
-                    type: 'success',
-                    message: 'Item removed from cart',
-                    placement: 'top',
-                })
                 setCart(prevCart => prevCart.filter(item => item.productId !== productId));
                 //Recalculate total
                 axios.get('http://localhost:4005/cart/calculate-total-price', {

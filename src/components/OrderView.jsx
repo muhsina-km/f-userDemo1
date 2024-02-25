@@ -12,9 +12,6 @@ const OrderView = () => {
   const [orders, setOrders] = useState([]);
   const userId = localStorage.getItem('user');
 
-const cancelRemove = () => {
-    message.info('Cancelled removing item from cart');
-}
   useEffect(() => {
     axios
       .get(`${baseurl}/order/fetch-orders`)
@@ -29,15 +26,10 @@ const cancelRemove = () => {
 
   const handleCancelOrder = async (orderId) => {
     try {
-      const response = await 
-      axios.delete(`${baseurl}/order/remove-order/${orderId}`);
+      const response = await
+        axios.delete(`${baseurl}/order/remove-order/${orderId}`);
       if (response.status === 200) {
         console.log('Order canceled successfully');
-                notification.open({
-                    type: 'success',
-                    message: 'Order canceled successfully',
-                    placement: 'top',
-                })
         setOrders((prevOrders) => prevOrders.filter((order) => order._id !== orderId));
       } else {
         console.error('Failed to cancel order', response.data.message);
@@ -45,6 +37,14 @@ const cancelRemove = () => {
     } catch (error) {
       console.error('Error cancelling order:', error);
     }
+  }  
+
+  const confirmRemove = (orderId) => {
+    handleCancelOrder(orderId);
+  }
+
+  const cancelRemove = () => {
+    message.info('Cancelled removing item from cart');
   }
 
   return (
@@ -80,16 +80,15 @@ const cancelRemove = () => {
               </div>
             ))}
             <Popconfirm
-              title="Are you sure you want to cancel this order?"
-              onConfirm={() => handleCancelOrder(order._id)}
+              title="Are you sure to cancel this order?"
+              onConfirm={() => confirmRemove(order._id)}
               onCancel={cancelRemove}
               okText="Yes"
-              cancelText="No"
-            >
+              cancelText="No">
               <Button type="primary" danger style={{ marginTop: '8px' }}>
                 Cancel Order
               </Button>
-              </Popconfirm>
+            </Popconfirm>
           </Card>
         ))}
       </div>
