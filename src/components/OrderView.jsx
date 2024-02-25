@@ -16,9 +16,9 @@ const OrderView = () => {
 
   useEffect(() => {
     axios
-      .get(`${baseurl}/orders/place-order`)
+      .get(`${baseurl}/order/fetch-orders`)
       .then((response) => {
-        console.log(response.data.orders);
+        console.log('Fetched Orders:', response.data.orders);
         setOrders(response.data.orders);
       })
       .catch((error) => {
@@ -27,7 +27,7 @@ const OrderView = () => {
   }, [userId]);
 
   return (
-    <div style={{backgroundColor:'#FFF5F5', paddingTop:'4px'}}>
+    <div style={{ backgroundColor: '#FFF5F5', paddingTop: '4px' }}>
       <Navbar />
       <Breadcrumb style={{ marginLeft: '60px', marginTop: '100px', marginBottom: '-80px' }}>
         <Breadcrumb.Item>
@@ -37,28 +37,40 @@ const OrderView = () => {
           <Link to='/place-order'>Orders</Link>
         </Breadcrumb.Item>
       </Breadcrumb>
-      
+
       <div className='product-grid'>
-        {orders.map((orders,index) => (
+        {orders.map((order, index) => (
           <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={animationCompleted ? { opacity: 1, y: 0 } : {}}
-          transition={{type:'spring', delay: animationCompleted ? 0.1 * index : 0 }}
-        >
-          <Card
-            key={orders.id}
-            hoverable
-            style={{ width: 240, margin: '16px' }}
-            cover={<img alt="plant" src={orders.plantphoto} style={{ height: '150px', objectFit: 'cover' }} />}
+            key={order._id} // Add a unique key for each order
+            initial={{ opacity: 0, y: 30 }}
+            animate={animationCompleted ? { opacity: 1, y: 0 } : {}}
+            transition={{ type: 'spring', delay: animationCompleted ? 0.1 * index : 0 }}
           >
-            <Meta title={orders.plantname} />
-            <Meta title={`₹${orders.price}`}  description={orders.size} />
-            <Link to={`/view/${orders.plantid}`}>
-            <Button type="primary" style={{ marginTop: '8px' }}>
-              Product Details</Button> </Link>
-          </Card></motion.div>
+            <Card
+              hoverable
+              style={{ width: 240, margin: '16px' }}
+              // cover={<img alt="plant" src={order.items[0].plantphoto} style={{ height: '150px', objectFit: 'cover' }} />}
+            >
+              <Meta title={order.name} description={`Address: ${order.address}, District: ${order.district}`} />
+              <Meta title={`Payment: ${order.payment}`} description={`Phone: ${order.phone}`} />
+
+              <h3>Ordered Items:</h3>
+              {order.items.map((item) => (
+                <div key={item._id}>
+                  <p>Product ID: {item.productId}</p>
+                  <p>Quantity: {item.quantity}</p>
+                </div>
+              ))}
+
+              <Link to={`/view/${order.items[0].productId}`}>
+                <Button type="primary" style={{ marginTop: '8px' }}>
+                  Product Details
+                </Button>
+              </Link>
+            </Card>
+          </motion.div>
         ))}
-    </div>
+      </div>
 
       <BottomNavbar />
       <Footer />

@@ -35,7 +35,7 @@ function App() {
       <Route path="/about" element={<AboutPage/>}></Route>
       <Route path="/categories" element={<Category/>}></Route>
       <Route path="/products/:category" element={<EachCategory/>}></Route>
-      <Route path="/Order" element={<OrderView/>}></Route>
+      <Route path="/order" element={<OrderView/>}></Route>
       </Routes>
       </BrowserRouter>
 
