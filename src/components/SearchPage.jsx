@@ -28,6 +28,9 @@ const SearchPage = () => {
         if(response.data.length === 0){
           setNothingFound(true);
         }
+        else{
+          setNothingFound(false);
+        }
         setPlantdetailsview(response.data);
       })
       .catch((err) => console.log(err));
@@ -37,7 +40,7 @@ const SearchPage = () => {
 
   if(nothingFound){
     return (
-      <div style={{backgroundColor:'#FFF5F5', paddingTop:'4px'}}>
+      <div>
         <Navbar/>
         <NotFound/>
         <Footer/>

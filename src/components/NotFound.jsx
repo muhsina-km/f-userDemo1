@@ -1,6 +1,6 @@
 import { Player } from '@lottiefiles/react-lottie-player'
 import React from 'react'
-import notfound from '../assets/notfound.json'
+import notfound from '../assets/notfound2.json'
 import { Button, Col, Row } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { Refresh } from '@mui/icons-material'
@@ -19,10 +19,10 @@ const NotFound = () => {
         <Player
         style={{ height: '300px', width: '300px',marginTop: '25px', marginBottom: '-20px' }}
         autoplay
-        src={notfound}
+        src="https://lottie.host/070f29cc-5d37-490e-8daa-7cfce5658b5a/QWebwEn1oU.json"
         loop
-        ></Player><h1 style={{color:'#1CC9BE'}}>No Results Found</h1></Col>
-        <Button style={{marginTop: '-200px'}} type="primary" onClick={handleClick} >Go Back</Button>
+        ></Player><h1 style={{color:'#ED5945'}}>No Results Found</h1></Col>
+        <Button style={{marginTop: '-200px'}} type="primary" danger onClick={handleClick} >Go Back</Button>
         {/* onClick={() => navigate(-1)} */}
         </Row>
         </div>

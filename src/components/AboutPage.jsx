@@ -35,7 +35,7 @@ const AboutPage = () => {
       </Fade>
       <Row>
         <Col span={6}>
-          <Parallax translateX={[-40, 0]}>
+          <Parallax translateX={[-40, 0]} rotate={[10, -10]} scale={[1.2,1, 0.7]}>
           <img src={redrose} style={{ width: '250px' }} alt="flower" />
           </Parallax>
         </Col>
@@ -57,7 +57,7 @@ const AboutPage = () => {
               BloomingBuds was born out of this dream, growing from a small seedling of an idea to a flourishing online marketplace.</p>
           </Col>
           <Col span={6}>
-          <Parallax translateX={[30, 0]}>
+          <Parallax translateX={[30, 0]} rotate={[10, 0, 0]} scale={[1.2, 1]}>
             <img src={shop} style={{ width: '250px' }} alt="flower" />
             </Parallax>
           </Col></Row></Fade>
@@ -65,7 +65,7 @@ const AboutPage = () => {
       <Fade delay={400} triggerOnce>
         <Row>
           <Col span={6}>
-          <Parallax translateX={[-40, 0]}>
+          <Parallax translateX={[-40, 0]} rotate={[-20, 0]} scale={[1.2, 1]}>
             <img src={delivery} style={{ width: '250px' }} alt="flower" />
             </Parallax>
           </Col>
@@ -86,7 +86,7 @@ const AboutPage = () => {
           plant enthusiast or a beginner, BloomingBuds is here to inspire and guide you on your journey with nature.</p>
           </Col>
           <Col span={6}>
-          <Parallax translateX={[30, 0]}>
+          <Parallax translateX={[30, 0]} rotate={[10, 0, 0]} scale={[1.2, 1]}>
             <img src={plant} style={{ width: '250px' }} alt="flower" />
             </Parallax>
           </Col></Row></Fade>
@@ -94,7 +94,7 @@ const AboutPage = () => {
           <Fade delay={400} triggerOnce>
         <Row>
           <Col span={6}>
-          <Parallax translateX={[-40, 0]}>
+          <Parallax translateX={[-40, 0]} rotate={[-50, 0]} scale={[0.8, 1]}>
             <img src={echo} style={{ width: '250px' }} alt="flower" />
             </Parallax>
           </Col>
@@ -114,7 +114,7 @@ const AboutPage = () => {
           Explore our online garden, find the perfect flowering companion, and let the BloomingBuds experience unfold in your home.</p>
           </Col>
           <Col span={6}>
-          <Parallax translateX={[30, 0]}>
+          <Parallax translateX={[30, 0]} rotate={[30, 0, 0]} scale={[1.2, 1]}>
             <img src={thanku} style={{ width: '220px' }} alt="flower" />
             </Parallax>
           </Col></Row></Fade>
