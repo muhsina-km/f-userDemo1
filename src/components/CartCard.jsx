@@ -1,4 +1,4 @@
-import { Button, Card, Col, Row, Skeleton, Space } from 'antd'
+import { Button, Card, Col, Popconfirm, Row, Skeleton, Space, message } from 'antd'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import baseurl from '../Api';
@@ -15,6 +15,15 @@ const CartCard = ({ data, removeFromCart }) => {
             behavior: 'smooth',
         });
     };
+
+    const confirmRemove = () => {
+        removeFromCart(email, productId);
+        message.success('Item removed from cart');
+    }
+
+    const cancelRemove = () => {
+        message.info('Cancelled removing item from cart');
+    }
 
     return (
         <Card
@@ -35,9 +44,16 @@ const CartCard = ({ data, removeFromCart }) => {
                                 <Button type="primary" size='small' icon={<EyeOutlined />}>
                                     View
                                 </Button></Link>
+                                <Popconfirm 
+                                    title="Are you sure to remove this item from cart?"
+                                    onConfirm={confirmRemove}
+                                    onCancel={cancelRemove}
+                                    okText="Yes"
+                                    cancelText="No">
                             <Button type="primary" danger size='small' onClick={() => removeFromCart(email, productId)}>
                                 Remove from Cart
                             </Button>
+                            </Popconfirm>
                         </Space>
                     </Col>
                 </Row>

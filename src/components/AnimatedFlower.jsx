@@ -10,7 +10,7 @@ const AnimatedFlower = () => {
         alignItems: 'center',
         justifyContent: 'center',
         height: '100vh',
-        backgroundColor: '#FFF5F5',
+        backgroundColor: '#FFF4F4',
       }}
     >
       <div style={{ marginBottom: '20px' }}>
