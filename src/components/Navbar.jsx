@@ -47,7 +47,7 @@ const Navbar = () => {
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="fixed" sx={{ backgroundColor: '#ED596B' }}>
+        <AppBar position="fixed" sx={{ backgroundColor: '#ED5945' }}>
           <Toolbar>
             <LocalFloristIcon sx={{
               fontSize: 26, color: '#FFFFFF'
@@ -73,19 +73,19 @@ const Navbar = () => {
               }}
             />
 
-            <Box sx={{ flexGrow: 6, display: 'flex', justifyContent: 'center', gap: '18px', color: '#000000' }}>
-              <Typography style={{ fontSize: '14px' }} component={Link} to="/" onClick={scrollToTop}>
-                HOME</Typography>
-              <Typography style={{ fontSize: '14px' }} component={Link} to="/home" onClick={scrollToTop}>
-                SHOP</Typography>
+            <Box sx={{ flexGrow: 6, display: 'flex', justifyContent: 'center', gap: '18px' }}>
+              <Button type='text' style={{ fontSize: '14px', color: '#FFFFFF' }} component={Link} to="/" onClick={scrollToTop}>
+                HOME</Button>
+              <Button type='text' style={{ fontSize: '14px', color: '#FFFFFF' }} component={Link} to="/home" onClick={scrollToTop}>
+                SHOP</Button>
               <ScrollLink to="About" smooth={true} duration={500}>
-                <Typography style={{ fontSize: '14px', cursor: 'pointer', }}>
-                  ABOUT</Typography></ScrollLink>
+                <Button  type='text' style={{ fontSize: '14px', cursor: 'pointer', color: '#FFFFFF' }}>
+                  ABOUT</Button></ScrollLink>
               &nbsp; &nbsp; &nbsp;
-              <Typography style={{ fontSize: '14px' }} component={Link} to="/cart">
+              <Button style={{ fontSize: '14px' }} component={Link} to="/cart">
                 <ShoppingCartIcon sx={{
-                  fontSize: 20, color: '#000000'
-                }} /></Typography>
+                  fontSize: 20, color: '#FFFFFF'
+                }} /></Button>
                 </Box>
 
                 {userProfile ? (
@@ -94,10 +94,10 @@ const Navbar = () => {
         </Avatar>
               ) : (
                 <>
-                  <Button component={Link} to="/login" sx={{ fontSize: 12, color: '#000000' }}>
+                  <Button component={Link} to="/login" sx={{ fontSize: 12, color: '#FFFFFF' }}>
                     Login
                   </Button>
-                  <Button component={Link} to="/register" sx={{ fontSize: 12, color: '#000000' }}>
+                  <Button component={Link} to="/register" sx={{ fontSize: 12, color: '#FFFFFF' }}>
                     Signin
                   </Button>
                 </>
