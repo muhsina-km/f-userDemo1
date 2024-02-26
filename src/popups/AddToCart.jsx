@@ -1,4 +1,4 @@
-import { Button, Card, InputNumber, Space } from 'antd'
+import { Button, Card, InputNumber, Space, notification } from 'antd'
 import axios from 'axios';
 import React, { useState } from 'react'
 
@@ -8,6 +8,14 @@ const AddToCart = ({ productId, onClose,addedToCart}) => {
 
     const addToCart = async () => {
         const email = localStorage.getItem('user');
+        if (!email) {
+          notification.open({
+            type: 'warning',  
+            message: 'Please Login first to add items to cart',
+            placement: 'topLeft',
+          })
+          return;
+        }
         try {
           const response = await axios.post('http://localhost:4005/cart/add-to-cart', {
             email,
@@ -20,6 +28,7 @@ const AddToCart = ({ productId, onClose,addedToCart}) => {
           console.error('Error:', error.message); // Log the error message
         }
       };
+      
   return (
     <Card title="Add To Cart">
         <Space>
@@ -33,7 +42,7 @@ const AddToCart = ({ productId, onClose,addedToCart}) => {
         Reset
       </Button>
     </Space>
-    <h1>{value}</h1>
+    <h3 style={{marginLeft:'28px'}}>Quantity : {value}</h3>
     <br />
     <Space size="large" style={{ marginTop: '0px' }}>
     <Button type="primary" onClick={onClose}>Cancel</Button>

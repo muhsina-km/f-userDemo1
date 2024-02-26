@@ -50,7 +50,7 @@ const PlaceOrder = ({setOpened , cart}) => {
 
   const steps = [
     {
-      title: "Fill Details",
+      title: "Shipping Details",
       icon: <IdcardOutlined />,
       content: <OrderDetailsForm form={form} onFinish={handleOnChange} values={formdata} />,
     },

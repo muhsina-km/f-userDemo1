@@ -10,6 +10,7 @@ import { ShoppingCartOutlined } from '@ant-design/icons'
 import CountUp from 'react-countup'
 import { Link } from 'react-router-dom'
 import PlaceOrder from '../popups/PlaceOrder'
+import EmptyCart from './EmptyCart'
 
 const ViewCart = () => {
     const [cart, setCart] = useState([])
@@ -91,6 +92,9 @@ const ViewCart = () => {
                 </Breadcrumb.Item>
             </Breadcrumb>
 
+            {cart.length === 0 ? (
+                <EmptyCart/>
+            ) : (
             <div>
             <h2 style={{ marginTop: '100px', textAlign: 'center' }}>Cart Items</h2>
             <Row  className='product-grid'
@@ -107,6 +111,8 @@ const ViewCart = () => {
                 ))}
             </Row>
             </div>
+            )}
+            
             <Row>
                 <br /> <br /> <br /> <br />
             </Row>
