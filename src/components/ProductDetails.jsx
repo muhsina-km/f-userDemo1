@@ -27,14 +27,23 @@ const ProductDetails = () => {
   const userEmail = user ? JSON.parse(user).email : null;
 
   const handleAddToWishlist = async (plantid) => {
+    if (userEmail) {
     try {
       await addToWishlist(userEmail, plantid);
       setWishlist([...wishlist, plantid]);
       setIsInWishlist(true);
     } catch (error) {
       console.error('Error adding item to wishlist:', error);
-    }
+    } 
+  } else {
+    notification.open({
+      type: 'warning',
+      message: 'Please Login first to add items to wishlist',
+      placement: 'topLeft',
+    });
+  }
   };
+
   const handleRemoveFromWishlist = async (plantid) => {
     try {
       await removeFromWishlist(userEmail, plantid);
@@ -94,13 +103,23 @@ useEffect(() => {
   }
 
   const handleAddToCart = () => {
-    notification.open({
-      type: 'success',
-      message: 'Added to cart',
-      placement: 'topLeft',
-    })
-    setIsModalVisible(false);
-  }
+    if (userEmail) {
+      notification.open({
+        type: 'success',
+        message: 'Added to Cart',
+        placement: 'topLeft',
+      });
+      setIsModalVisible(false);
+    } else {
+      console.log('User not Logged in. Display login warning.');
+      notification.open({
+        type: 'warning',
+        message: 'Please Login first to add items to cart',
+        placement: 'topLeft',
+      });
+    }
+  };
+   
 
  const handleBuyNow = () => {
    notification.open({
