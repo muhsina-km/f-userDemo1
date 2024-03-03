@@ -12,21 +12,34 @@ import EmptyCart from './EmptyCart';
 const OrderView = () => {
   const [orders, setOrders] = useState([]);
   const [messageApi, contextHolder] = message.useMessage();
+  const [orderedItemsDetails, setOrderedItemsDetails] = useState([]);
   const navigate = useNavigate();
   const userId = localStorage.getItem('user');
 
   useEffect(() => {
-   if (userId) {
-    axios
-    .get(`${baseurl}/order/fetch-orders`)
-    .then((response) => {
-      console.log('Fetched Orders:', response.data.orders);
-      setOrders(response.data.orders);
-    })
-    .catch((error) => {
-      console.error('Error fetching orders:', error);
-    });
-   }
+    if (userId) {
+      axios
+        .get(`${baseurl}/order/fetch-orders`)
+        .then((response) => {
+          console.log('Fetched Orders:', response.data.orders);
+          setOrders(response.data.orders);
+          //fetch other details
+          const orderedItemsPromise = response.data.orders.map((order) =>
+            Promise.all(
+              order.items.map((item) =>
+                axios.get(`${baseurl}/plantdetails/pview/${item.productId}`)
+              )
+            )
+          );
+          Promise.all(orderedItemsPromise)
+            .then((orderedItemsDetails) => {
+              setOrderedItemsDetails(orderedItemsDetails);
+            });
+        })
+        .catch((error) => {
+          console.error('Error fetching orders:', error);
+        });
+    }
   }, [userId]);
 
   const handleCancelOrder = async (orderId) => {
@@ -36,8 +49,8 @@ const OrderView = () => {
       if (response.status === 200) {
         console.log('Order canceled successfully');
         messageApi.open({
-          type: 'error',
-          content: 'Invalid email or password',
+          type: 'success',
+          content: 'Order canceled successfully',
         });
         setOrders((prevOrders) => prevOrders.filter((order) => order._id !== orderId));
       } else {
@@ -46,7 +59,7 @@ const OrderView = () => {
     } catch (error) {
       console.error('Error cancelling order:', error);
     }
-  }  
+  }
 
   const confirmRemove = (orderId) => {
     handleCancelOrder(orderId);
@@ -58,7 +71,7 @@ const OrderView = () => {
 
   const handleClick = () => {
     navigate('/home')
-   }
+  }
 
   return (
     <div style={{ backgroundColor: '#FFF5F5', paddingTop: '4px' }}>
@@ -71,53 +84,69 @@ const OrderView = () => {
           <Link to=''>orders</Link>
         </Breadcrumb.Item>
       </Breadcrumb>
-     {contextHolder}
-     {orders.length === 0 ? (
-        <div style={{textAlign:'center', marginTop:'180px', marginBottom:'0px' }}>
-        <h2 style={{color:'#ED5945'}}>You have not placed any orders</h2>
-        <h4>Explore our selection and add some blooming beauties to your Garden</h4>
-        <Button style={{marginTop: '-200px'}} type="primary" danger onClick={handleClick} >Go Back</Button>
+      {contextHolder}
+      {orders.length === 0 ? (
+        <div style={{ textAlign: 'center', marginTop: '180px', marginBottom: '0px' }}>
+          <h2 style={{ color: '#ED5945' }}>You have not placed any orders</h2>
+          <h4>Explore our selection and add some blooming beauties to your Garden</h4>
+          <Button style={{ marginTop: '-200px' }} type="primary" danger onClick={handleClick} >Go Back</Button>
         </div>
       ) : (
         <div className='product-grid'>
-        {orders.map((order) => (
-          <Card
-            key={order._id}
-            hoverable
-            style={{ width: '240', margin: '16px' }}
-          >
-            <Meta title={order.name} />
-            {/* <p>Address:{order.address}</p>
+          {orders.map((order, orderIndex) => (
+            <Card
+              key={order._id}
+              hoverable
+              style={{ width: '240', margin: '16px' }}
+            >
+              {/* <Meta title={order.name} />
+              <p>Address:{order.address}</p>
             <p>Phone No: {order.phone}</p>
             <p>District: {order.district}</p>
             <p>Payment: {order.payment}</p> */}
 
-            <h4>Ordered Items:</h4>
-            {order.items.map((item) => (
-              <div key={item._id}>
-                <p>Product ID: {item.productId}</p>
-                <p>Quantity: {item.quantity}</p>
-              </div>
-            ))}
-            {order.status !== 'DELIVERED' && (
-              <Space>
-                <p> <b>ORDERING</b> </p>
-            <Popconfirm
-              title="Are you sure to cancel this order?"
-              onConfirm={() => confirmRemove(order._id)}
-              onCancel={cancelRemove}
-              okText="Yes"
-              cancelText="No">
-              <Button type="primary" danger style={{ marginTop: '8px' }}>
-                Cancel Order
-              </Button>
-            </Popconfirm> 
-            </Space>
-            )}
-            {order.status === 'DELIVERED' && <p style={{ color: 'green', marginTop: '8px' }}> <b>Order Delivered</b> </p>}
-          </Card>
-        ))}
-      </div>
+              {/* <h4>Ordered Items:</h4> */}
+              {order.items.map((item) => {
+                const itemDetails = orderedItemsDetails[orderIndex] || [];
+                const detailsForItem = itemDetails.find((details) => details.data[0]?.plantid === item.productId);
+
+                return (
+                  <div key={item._id} style={{ display: 'flex', alignItems: 'center' }}>
+                    <img src={detailsForItem?.data[0]?.plantphoto} alt="plant" style={{ height: '150px', width: '180px', objectFit: 'cover' }} />
+                    <div style={{ marginLeft: '16px' }}>
+                      <p>Product ID: {item.productId}</p>
+                      <p>Quantity: {item.quantity}</p>
+                      {detailsForItem && (
+                        <div>
+                          <p>Product Name: {detailsForItem.data[0].plantname}</p>
+                          <p>Price: ₹{detailsForItem.data[0].price}</p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+
+
+              {order.status !== 'DELIVERED' && (
+                <Space>
+                  <p> <b>ORDERING</b> </p>
+                  <Popconfirm
+                    title="Are you sure to cancel this order?"
+                    onConfirm={() => confirmRemove(order._id)}
+                    onCancel={cancelRemove}
+                    okText="Yes"
+                    cancelText="No">
+                    <Button type="primary" danger style={{ marginTop: '8px' }}>
+                      Cancel Order
+                    </Button>
+                  </Popconfirm>
+                </Space>
+              )}
+              {order.status === 'DELIVERED' && <p style={{ color: 'green', marginTop: '8px' }}> <b>Order Delivered</b> </p>}
+            </Card>
+          ))}
+        </div>
       )}
 
       <BottomNavbar />
