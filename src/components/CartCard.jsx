@@ -36,9 +36,9 @@ const CartCard = ({ data, removeFromCart }) => {
                 <Row>
                     <Col span={24}>
                         <h3>{data.plantname}</h3>
-                        <p style={{marginTop:'-13px'}}> ₹:{data.price} </p>
-                        <p style={{marginTop:'-13px'}}> Total Items:{data.quantity} </p>
-                        <p style={{marginTop:'-13px'}}> Total Price:₹{data.price * count} </p>
+                        <p> ₹:{data.price} </p>
+                        <p> Total Items:{data.quantity} </p>
+                        <p> Total Price:₹{data.price * count} </p>
                         <Space style={{ marginLeft: '-12px' }}>
                             <Link to={`/view/${productId}`} onClick={handleLinkClick}>
                                 <Button type="primary" size='small' icon={<EyeOutlined />}>

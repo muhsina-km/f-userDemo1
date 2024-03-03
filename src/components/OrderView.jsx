@@ -4,7 +4,7 @@ import baseurl from '../Api';
 import Navbar from './Navbar';
 import BottomNavbar from './BottomNavbar';
 import Footer from './Footer';
-import { Breadcrumb, Card, Button, notification, message, Popconfirm } from 'antd';
+import { Breadcrumb, Card, Button, notification, message, Popconfirm, Space } from 'antd';
 import { Link } from 'react-router-dom';
 import Meta from 'antd/es/card/Meta';
 
@@ -64,13 +64,13 @@ const OrderView = () => {
           <Card
             key={order._id}
             hoverable
-            style={{ width: 240, margin: '16px' }}
+            style={{ width: '240', margin: '16px' }}
           >
             <Meta title={order.name} />
-            <p>Address:{order.address}</p>
+            {/* <p>Address:{order.address}</p>
             <p>Phone No: {order.phone}</p>
             <p>District: {order.district}</p>
-            <p>Payment: {order.payment}</p>
+            <p>Payment: {order.payment}</p> */}
 
             <h4>Ordered Items:</h4>
             {order.items.map((item) => (
@@ -79,6 +79,9 @@ const OrderView = () => {
                 <p>Quantity: {item.quantity}</p>
               </div>
             ))}
+            {order.status !== 'DELIVERED' && (
+              <Space>
+                <p> <b>ORDERING</b> </p>
             <Popconfirm
               title="Are you sure to cancel this order?"
               onConfirm={() => confirmRemove(order._id)}
@@ -88,7 +91,10 @@ const OrderView = () => {
               <Button type="primary" danger style={{ marginTop: '8px' }}>
                 Cancel Order
               </Button>
-            </Popconfirm>
+            </Popconfirm> 
+            </Space>
+            )}
+            {order.status === 'DELIVERED' && <p style={{ color: 'green', marginTop: '8px' }}> <b>Order Delivered</b> </p>}
           </Card>
         ))}
       </div>

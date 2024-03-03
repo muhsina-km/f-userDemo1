@@ -28,7 +28,7 @@ export default function SimpleBottomNavigation({nowin}) {
         <BottomNavigationAction component={Link} to="/home" label="Home" icon={<HomeIcon />} />
         <BottomNavigationAction component={Link} to="/categories" label="Categories" icon={<GridViewRoundedIcon />} />
         <BottomNavigationAction component={Link} to="/favorites" label="Favorites" icon={<FavoriteIcon />} />
-        <BottomNavigationAction component={Link} to="/Order" label="Orders" icon={<AssignmentTurnedInIcon />} />
+        <BottomNavigationAction component={Link} to="/order" label="My Orders" icon={<AssignmentTurnedInIcon />} />
       </BottomNavigation>
     </Box>
   );
