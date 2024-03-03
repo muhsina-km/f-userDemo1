@@ -7,7 +7,7 @@ import axios from 'axios'
 import baseurl from '../Api'
 import { Card, Button, Row, Breadcrumb } from 'antd';
 import Meta from 'antd/es/card/Meta'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { motion } from 'framer-motion';
 
 const WishList = () => {
@@ -15,6 +15,7 @@ const WishList = () => {
   const [Plantdetailsview, setPlantdetailsview] = useState([]);
   const [trigger, setTrigger] = useState(false);
   const [animationCompleted, setAnimationCompleted] = useState(false);
+  const navigate = useNavigate();
 const user = localStorage.getItem("user")
 const email = user ? JSON.parse(user).email : null;
   useEffect(() => {
@@ -33,6 +34,9 @@ const email = user ? JSON.parse(user).email : null;
     setAnimationCompleted(true);
   }, [trigger]);
 
+  const handleClick = () => {
+    navigate('/home')
+   }
 
   return (
     <div style={{backgroundColor:'#FFF5F5', paddingTop:'4px'}}>
@@ -45,7 +49,15 @@ const email = user ? JSON.parse(user).email : null;
             <Link to=''>wishlist</Link>
           </Breadcrumb.Item>
         </Breadcrumb>
-          <div className='product-grid'>
+    
+       {Plantdetailsview.length === 0 ? (
+         <div style={{textAlign:'center', marginTop:'180px', marginBottom:'0px' }}>
+            <h2 style={{color:'#ED5945'}}>Your wishlist is empty</h2>
+            <h4>No wishes yet? Let's start planting dreams in your wishlist!</h4>
+            <Button style={{marginTop: '-200px'}} type="primary" danger onClick={handleClick} >Go Back</Button>
+         </div>
+       ) : (
+        <div className='product-grid'>
         {Plantdetailsview.map((Plantdetailsview,index) => (
           <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -66,6 +78,8 @@ const email = user ? JSON.parse(user).email : null;
           </Card></motion.div>
         ))}
     </div>
+       )}
+         
      <div>
       <BottomNavbar nowin="wishlist"/>
      </div>

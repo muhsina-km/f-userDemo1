@@ -5,23 +5,28 @@ import Navbar from './Navbar';
 import BottomNavbar from './BottomNavbar';
 import Footer from './Footer';
 import { Breadcrumb, Card, Button, notification, message, Popconfirm, Space } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Meta from 'antd/es/card/Meta';
+import EmptyCart from './EmptyCart';
 
 const OrderView = () => {
   const [orders, setOrders] = useState([]);
+  const [messageApi, contextHolder] = message.useMessage();
+  const navigate = useNavigate();
   const userId = localStorage.getItem('user');
 
   useEffect(() => {
+   if (userId) {
     axios
-      .get(`${baseurl}/order/fetch-orders`)
-      .then((response) => {
-        console.log('Fetched Orders:', response.data.orders);
-        setOrders(response.data.orders);
-      })
-      .catch((error) => {
-        console.error('Error fetching orders:', error);
-      });
+    .get(`${baseurl}/order/fetch-orders`)
+    .then((response) => {
+      console.log('Fetched Orders:', response.data.orders);
+      setOrders(response.data.orders);
+    })
+    .catch((error) => {
+      console.error('Error fetching orders:', error);
+    });
+   }
   }, [userId]);
 
   const handleCancelOrder = async (orderId) => {
@@ -30,6 +35,10 @@ const OrderView = () => {
         axios.delete(`${baseurl}/order/remove-order/${orderId}`);
       if (response.status === 200) {
         console.log('Order canceled successfully');
+        messageApi.open({
+          type: 'error',
+          content: 'Invalid email or password',
+        });
         setOrders((prevOrders) => prevOrders.filter((order) => order._id !== orderId));
       } else {
         console.error('Failed to cancel order', response.data.message);
@@ -47,6 +56,10 @@ const OrderView = () => {
     message.info('Cancelled removing item from cart');
   }
 
+  const handleClick = () => {
+    navigate('/home')
+   }
+
   return (
     <div style={{ backgroundColor: '#FFF5F5', paddingTop: '4px' }}>
       <Navbar />
@@ -58,8 +71,15 @@ const OrderView = () => {
           <Link to=''>orders</Link>
         </Breadcrumb.Item>
       </Breadcrumb>
-
-      <div className='product-grid'>
+     {contextHolder}
+     {orders.length === 0 ? (
+        <div style={{textAlign:'center', marginTop:'180px', marginBottom:'0px' }}>
+        <h2 style={{color:'#ED5945'}}>You have not placed any orders</h2>
+        <h4>Explore our selection and add some blooming beauties to your Garden</h4>
+        <Button style={{marginTop: '-200px'}} type="primary" danger onClick={handleClick} >Go Back</Button>
+        </div>
+      ) : (
+        <div className='product-grid'>
         {orders.map((order) => (
           <Card
             key={order._id}
@@ -98,6 +118,7 @@ const OrderView = () => {
           </Card>
         ))}
       </div>
+      )}
 
       <BottomNavbar />
       <Footer />
