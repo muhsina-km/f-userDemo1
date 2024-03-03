@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Row, Col, Typography, message } from 'antd';
+import { Form, Input, Button, Row, Col, Typography, message, notification } from 'antd';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
@@ -26,6 +26,11 @@ const SignupPage = () => {
             console.log(result);
     
             if (result.status === 201) {
+                notification.open({
+                    type: 'success',
+                    message: 'Account created successful',
+                    placement: 'top',
+                  });
                 navigate('/login');
             } else {
                 messageApi.open({

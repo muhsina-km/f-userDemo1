@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Row, Col, message, Typography } from 'antd';
+import { Form, Input, Button, Row, Col, message, Typography, notification } from 'antd';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
@@ -19,6 +19,11 @@ const LoginPage = () => {
         if (result.data === "Success") {
           const userProfile = {email};
           localStorage.setItem('user', JSON.stringify(userProfile));
+          notification.open({
+            type: 'success',
+            message: 'Login successful',
+            placement: 'top',
+          });
           navigate('/home')
         } else {
           messageApi.open({
