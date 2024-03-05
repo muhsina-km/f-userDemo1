@@ -20,7 +20,7 @@ const PlaceOrder = ({setOpened , cart}) => {
       ...formdata,
       ...values,
       email: email,
-      items: cart.map(items => ({ productId: items.productId, quantity: items.quantity })),
+      items: cart.map(items => ({ productId: items.productId, quantity: items.quantity, price: items.price, plantname: items.plantname, plantphoto: items.plantphoto })),
     });
   };
 

@@ -118,8 +118,8 @@ const ViewCart = () => {
             </Row>
             <Footer style={{
                 borderTop: '1px solid #E2E2E2', alignItems: 'center',
-                height: '60px', textAlign: 'center', position: 'fixed',
-                bottom: '0', width: '100%', display: 'flex', justifyContent: 'space-between'
+                height: '20px', textAlign: 'center', position: 'fixed',
+                bottom: '0', width: '95%', display: 'flex', justifyContent: 'space-between'
             }}>
                 <h3>Total Price:₹<CountUp end={total} /></h3>
                 <Button onClick={() => setIsPlaceOpen(true)} type="primary" icon={<ShoppingCartOutlined />}>

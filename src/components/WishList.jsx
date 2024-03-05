@@ -51,7 +51,7 @@ const email = user ? JSON.parse(user).email : null;
         </Breadcrumb>
     
        {Plantdetailsview.length === 0 ? (
-         <div style={{textAlign:'center', marginTop:'180px', marginBottom:'0px' }}>
+         <div style={{textAlign:'center', marginTop:'180px', marginBottom:'160px' }}>
             <h2 style={{color:'#ED5945'}}>Your wishlist is empty</h2>
             <h4>No wishes yet? Let's start planting dreams in your wishlist!</h4>
             <Button style={{marginTop: '-200px'}} type="primary" danger onClick={handleClick} >Go Back</Button>
