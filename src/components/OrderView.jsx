@@ -4,8 +4,9 @@ import baseurl from '../Api';
 import Navbar from './Navbar';
 import BottomNavbar from './BottomNavbar';
 import Footer from './Footer';
-import { Breadcrumb, Card, Button, notification, message, Popconfirm, Space } from 'antd';
+import { Breadcrumb, Card, Button, notification, message, Popconfirm, Space, Image } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 
 const OrderView = () => {
   const [orders, setOrders] = useState([]);
@@ -78,47 +79,54 @@ const OrderView = () => {
       {contextHolder}
       {orders.length === 0 ? (
         <div style={{ textAlign: 'center', marginTop: '180px', marginBottom: '160px' }}>
-        <h2 style={{ color: '#ED5945' }}>You have not placed any orders</h2>
-        <h4>Explore our selection and add some blooming beauties to your Garden</h4>
-        <Button style={{ marginTop: '-200px' }} type="primary" danger onClick={handleClick} >Go Back</Button>
-      </div>
+          <h2 style={{ color: '#ED5945' }}>You have not placed any orders</h2>
+          <h4>Explore our selection and add some blooming beauties to your Garden</h4>
+          <Button style={{ marginTop: '-200px' }} type="primary" danger onClick={handleClick} >Go Back</Button>
+        </div>
       ) : (
-        <div className='product-grid'>
+        <div className='ordercss'>
           {orders.map((order) => (
             <Card
               key={order._id}
               hoverable
-              style={{ width: 440, margin: '16px' }}
+              style={{ width: '80%', margin: '16px', marginLeft: '90px', marginRight: '50px'}}
             >
-              <h3>Ordered on {getCurrentDate(new Date())}</h3>
+              <h3 style={{ textAlign: 'center', marginBottom: '0px', marginTop: '0px', marginLeft: '-90px' }}>
+                Ordered on {getCurrentDate(new Date())}</h3>
               {order.items.map((item, index) => (
-                <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
-                  <img src={item.plantphoto} alt="plant" style={{ height: '150px', width: '180px', objectFit: 'cover' }} />
-                  <div style={{ marginLeft: '16px' }}>
-                    <p>Product ID: {item.productId}</p>
-                    <p>Quantity: {item.quantity}</p>
+                <div key={index}
+                  hoverable
+                  style={{ display: 'flex', alignItems: 'center', marginLeft: '20px'}}>
+                  <Image src={item.plantphoto} alt="plant" 
+                         style={{ height: '100px', width: '120px', objectFit: 'cover' }} />
+                  <div style={{ marginLeft: '40px' }}>
                     <p>Product Name: {item.plantname}</p>
                     <p>Price: ₹{item.price}</p>
+                    <p>Quantity: {item.quantity}</p>
                   </div>
                 </div>
               ))}
-              
+
+              <div style={{ marginLeft:'680px', marginTop:'-60px'}}>
               {order.status !== 'DELIVERED' && (
-                <Space>
-                  <p> <b>ORDERING</b> </p>
+                <div style={{ marginLeft:'20px'}}>
+                  <p style={{color: '#007FFF',marginLeft:'18px'}}> <b>ORDERING</b> </p> 
                   <Popconfirm
                     title="Are you sure to cancel this order?"
                     onConfirm={() => confirmRemove(order._id)}
                     onCancel={cancelRemove}
                     okText="Yes"
                     cancelText="No">
-                    <Button type="primary" danger style={{ marginTop: '8px' }}>
+                    <Button type="primary" danger style={{ marginTop: '-60px' }}>
                       Cancel Order
                     </Button>
                   </Popconfirm>
-                </Space>
+                </div>
               )}
-              {order.status === 'DELIVERED' && <p style={{ color: 'green', marginTop: '8px' }}> <b>Order Delivered</b> </p>}
+
+              {order.status === 'DELIVERED' && <p style={{ color: 'green', marginTop: '8px' }}> <b>ORDER DELIVERED</b> <DoneAllIcon style={{marginBottom:'-6px'}}/> </p>}
+              </div>
+
             </Card>
           ))}
         </div>
