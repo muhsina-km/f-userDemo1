@@ -13,6 +13,15 @@ const OrderView = () => {
   const navigate = useNavigate();
   const userId = localStorage.getItem('user');
 
+  const getCurrentDate = (date) => {
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    };
+    return new Date(date).toLocaleDateString('en-US', options);
+  }
+
   useEffect(() => {
     if (userId) {
       axios.get(`${baseurl}/order/fetch-orders`)
@@ -81,6 +90,7 @@ const OrderView = () => {
               hoverable
               style={{ width: 440, margin: '16px' }}
             >
+              <h3>Ordered on {getCurrentDate(new Date())}</h3>
               {order.items.map((item, index) => (
                 <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
                   <img src={item.plantphoto} alt="plant" style={{ height: '150px', width: '180px', objectFit: 'cover' }} />
