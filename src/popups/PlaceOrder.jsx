@@ -5,12 +5,14 @@ import SelectPayment from "../forms/SelectPayment";
 import { IdcardOutlined, CheckCircleOutlined, CreditCardOutlined } from "@ant-design/icons";
 import ConfirmOrder from "../forms/ConfirmOrder";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const { Step } = Steps;
 
 const PlaceOrder = ({setOpened , cart}) => {
   const [formdata, setFormdata] = useState({ name: "", phone: "", address: "", payment: "cash" });
   const [error, setError] = useState("");
+  const navigate = useNavigate();
   const [form] = Form.useForm();
   const user = localStorage.getItem("user");
   const email = user && JSON.parse(user).email;
@@ -32,6 +34,7 @@ const PlaceOrder = ({setOpened , cart}) => {
       console.log('Bakend Response:',response.data);
       if (response.status === 201) {
         //message.success("Order Placed Successfully");
+          navigate('/home')
           notification.open({
             type: 'success',
             message: 'Order Placed successfully',

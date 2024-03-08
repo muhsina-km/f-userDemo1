@@ -28,20 +28,20 @@ const ProductDetails = () => {
 
   const handleAddToWishlist = async (plantid) => {
     if (userEmail) {
-    try {
-      await addToWishlist(userEmail, plantid);
-      setWishlist([...wishlist, plantid]);
-      setIsInWishlist(true);
-    } catch (error) {
-      console.error('Error adding item to wishlist:', error);
-    } 
-  } else {
-    notification.open({
-      type: 'warning',
-      message: 'Please Login first to add items to wishlist',
-      placement: 'topLeft',
-    });
-  }
+      try {
+        await addToWishlist(userEmail, plantid);
+        setWishlist([...wishlist, plantid]);
+        setIsInWishlist(true);
+      } catch (error) {
+        console.error('Error adding item to wishlist:', error);
+      }
+    } else {
+      notification.open({
+        type: 'warning',
+        message: 'Please Login first to add items to wishlist',
+        placement: 'topLeft',
+      });
+    }
   };
 
   const handleRemoveFromWishlist = async (plantid) => {
@@ -65,8 +65,8 @@ const ProductDetails = () => {
       catch (error) {
         console.error('Error checking if plant is in wishlist:', error);
       }
-  }
-  fetchWishlist();
+    }
+    fetchWishlist();
   }, [plantid, userEmail]);
   const fetchsimilarData = async (query) => {
     try {
@@ -80,11 +80,11 @@ const ProductDetails = () => {
   };
 
 
-useEffect(() => {
-  if(Plantdetailsview){
+  useEffect(() => {
+    if (Plantdetailsview) {
       fetchsimilarData(Plantdetailsview.planttypeid);
     }
-}, [Plantdetailsview]);
+  }, [Plantdetailsview]);
 
   useEffect(() => {
     // Fetch the details of the product with id
@@ -95,7 +95,7 @@ useEffect(() => {
         setPlantdetailsview(response.data[0]);
       })
       .catch((err) => console.log(err));
-      
+
   }, [plantid]);
 
   if (!Plantdetailsview) {
@@ -103,44 +103,53 @@ useEffect(() => {
   }
 
   const handleAddToCart = () => {
-    if (userEmail) {
-      notification.open({
-        type: 'success',
-        message: 'Added to Cart',
-        placement: 'topLeft',
-      });
-      setIsModalVisible(false);
-    } else {
+    if (!userEmail) {
+      // User is not logged in
       console.log('User not Logged in. Display login warning.');
       notification.open({
         type: 'warning',
         message: 'Please Login first to add items to cart',
         placement: 'topLeft',
       });
+    } else if (Plantdetailsview.status !== 'AVAILABLE') {
+      // Plant is not available
+      notification.open({
+        type: 'error',
+        message: 'This plant is out of stock now',
+        placement: 'topLeft',
+      });
+    } else {
+      // Plant is available and user is logged in
+      notification.open({
+        type: 'success',
+        message: 'Added to Cart',
+        placement: 'topLeft',
+      });
+      setIsModalVisible(false);
     }
   };
-   
 
- const handleBuyNow = () => {
-   notification.open({
-     type: 'warning',
-     message: 'Add items to cart for Purchase',
-     placement: 'topLeft',
-   })
- }
+
+  const handleBuyNow = () => {
+    notification.open({
+      type: 'warning',
+      message: 'Add items to cart for Purchase',
+      placement: 'topLeft',
+    })
+  }
 
 
   return (
-    <div style={{backgroundColor:'#FFF5F5', paddingTop:'4px'}}>
-      <Navbar/>
-      <Breadcrumb style={{ marginLeft:'60px', marginTop:'90px', marginBottom:'-30px' }}>
-          <Breadcrumb.Item>
-            <Link to='/home'>Home</Link>
-          </Breadcrumb.Item>
-          <Breadcrumb.Item>
-            <Link to=''>Product</Link>
-          </Breadcrumb.Item>
-        </Breadcrumb>
+    <div style={{ backgroundColor: '#FFF5F5', paddingTop: '4px' }}>
+      <Navbar />
+      <Breadcrumb style={{ marginLeft: '60px', marginTop: '90px', marginBottom: '-30px' }}>
+        <Breadcrumb.Item>
+          <Link to='/home'>Home</Link>
+        </Breadcrumb.Item>
+        <Breadcrumb.Item>
+          <Link to=''>Product</Link>
+        </Breadcrumb.Item>
+      </Breadcrumb>
       {contextHolder}
       <Row gutter={16} style={{ margin: "50px" }}>
         <Col span={8}>
@@ -176,6 +185,13 @@ useEffect(() => {
           <br />
           <br />
           <Paragraph>Description: {Plantdetailsview.description}</Paragraph>
+
+          <Text type="primary" strong>Status:</Text><Text> {Plantdetailsview.status}</Text>
+          {Plantdetailsview.status !== 'AVAILABLE' && <p style={{ color: 'red', marginTop: '5px' }}>
+            This plant is out of stock now. Please check back later or explore similar plants. </p>}
+          {Plantdetailsview.status === 'AVAILABLE' && <p style={{ color: 'green', marginTop: '5px' }}>
+            This plant is currently available. Feel free to add it to your cart or wishlist !</p>}
+
           <br />
           <Space>
             <Button type="primary" shape="round" size={"medium"} onClick={handleBuyNow}>
@@ -185,22 +201,22 @@ useEffect(() => {
               Add to Cart
             </Button>
             {isInWishlisted ? (
-              <Button icon={<HeartFilled />} style={{color:'red'}} shape="round" size={"default"} onClick={() => handleRemoveFromWishlist(plantid)} />
-            ):
-            (<Button icon={<HeartOutlined />} shape="round" size={"default"} onClick={() => handleAddToWishlist(plantid)} />)}
+              <Button icon={<HeartFilled />} style={{ color: 'red' }} shape="round" size={"default"} onClick={() => handleRemoveFromWishlist(plantid)} />
+            ) :
+              (<Button icon={<HeartOutlined />} shape="round" size={"default"} onClick={() => handleAddToWishlist(plantid)} />)}
           </Space>
         </Col>
       </Row>
       {/* You can display other details of the product */}
-  
-<Divider orientation="left" style={{marginTop:'-20px' }}>
-  <h3>Similar Plants</h3>
-  </Divider>
+
+      <Divider orientation="left" style={{ marginTop: '-20px' }}>
+        <h3>Similar Plants</h3>
+      </Divider>
       <SmallSlider products={similarproducts}></SmallSlider>
       <Modal
         footer={null}
         open={isModalVisible}
-        ><AddToCart productId={plantid} onClose={() => setIsModalVisible(false)} addedToCart={handleAddToCart} /></Modal>
+      ><AddToCart productId={plantid} onClose={() => setIsModalVisible(false)} addedToCart={handleAddToCart} /></Modal>
     </div>
   );
 };
