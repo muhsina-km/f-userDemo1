@@ -188,10 +188,9 @@ const ProductDetails = () => {
 
           <Text type="primary" strong>Status:</Text><Text> {Plantdetailsview.status}</Text>
           {Plantdetailsview.status !== 'AVAILABLE' && <p style={{ color: 'red', marginTop: '5px' }}>
-            This plant is out of stock now. Please check back later or explore similar plants. </p>}
+          <h4 style={{marginTop:'0px'}}> This plant is out of stock now. Please check back later or explore similar plants. </h4></p>}
           {Plantdetailsview.status === 'AVAILABLE' && <p style={{ color: 'green', marginTop: '5px' }}>
-            This plant is currently available. Feel free to add it to your cart or wishlist !</p>}
-
+           <h4 style={{marginTop:'0px'}}> This plant is currently available. Feel free to add it to your cart or wishlist !</h4></p>}
           <br />
           <Space>
             <Button type="primary" shape="round" size={"medium"} onClick={handleBuyNow}>
