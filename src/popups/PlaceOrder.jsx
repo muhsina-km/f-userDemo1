@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 const { Step } = Steps;
 
-const PlaceOrder = ({setOpened , cart}) => {
+const PlaceOrder = ({ setOpened, cart }) => {
   const [formdata, setFormdata] = useState({ name: "", phone: "", address: "", payment: "cash" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -29,18 +29,23 @@ const PlaceOrder = ({setOpened , cart}) => {
   const handleOnFinish = async () => {
     try {
       console.log('formdata:', formdata);
-      const response = await 
-      axios.post('http://localhost:4005/order/place-order', formdata);
-      console.log('Bakend Response:',response.data);
+      const response = await
+        axios.post('http://localhost:4005/order/place-order', formdata);
+      console.log('Bakend Response:', response.data);
       if (response.status === 201) {
+        //clear cart after order placed
+        console.log("clearing cart...");
+        const clearCart =
+        await axios.post('http://localhost:4005/cart/clear-cart', { email });
+        console.log('clear cart:', clearCart.data);
         //message.success("Order Placed Successfully");
-          navigate('/home')
-          notification.open({
-            type: 'success',
-            message: 'Order Placed successfully',
-            description: 'Thank you for shopping with us',
-            placement: 'top',
-          })
+        navigate('/home')
+        notification.open({
+          type: 'success',
+          message: 'Order Placed successfully',
+          description: 'Thank you for shopping with us',
+          placement: 'top',
+        })
         setOpened(false);
       } else {
         message.error("Failed to place order");
