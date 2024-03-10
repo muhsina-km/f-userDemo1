@@ -9,6 +9,7 @@ import SmallSlider from "./SmallSlider";
 import AddToCart from "../popups/AddToCart";
 import { addToWishlist, viewWishlist, removeFromWishlist, isInWishlist } from "../functions/wishlistApi";
 import Navbar from "./Navbar";
+import BuyNow from "../buynowbutton/BuyNow";
 
 const ProductDetails = () => {
   const { plantid } = useParams();
@@ -196,9 +197,10 @@ const ProductDetails = () => {
             <Button type="primary" shape="round" size={"medium"} onClick={handleBuyNow}>
               Buy Now
             </Button>
-            <Button type="primary" shape="round" size={"medium"} onClick={() => setIsModalVisible(true)}>
+            <BuyNow onClick={() => setIsModalVisible(true)} Price={Plantdetailsview.price}/>
+            {/* <Button type="primary" shape="round" size={"medium"} onClick={() => setIsModalVisible(true)}>
               Add to Cart
-            </Button>
+            </Button> */}
             {isInWishlisted ? (
               <Button icon={<HeartFilled />} style={{ color: 'red' }} shape="round" size={"default"} onClick={() => handleRemoveFromWishlist(plantid)} />
             ) :
