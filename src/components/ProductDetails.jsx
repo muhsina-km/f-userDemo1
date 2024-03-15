@@ -4,7 +4,7 @@ import axios from "axios";
 import baseurl from "../Api";
 import { Badge, Breadcrumb, Button, Col, Divider, Image, Modal, Row, Space, Tag, Typography, message, notification } from "antd";
 import colorNames from "colornames";
-import { ArrowLeftOutlined, HeartOutlined, HeartFilled } from "@ant-design/icons";
+import { ArrowLeftOutlined, HeartOutlined, HeartFilled, LoadingOutlined } from "@ant-design/icons";
 import SmallSlider from "./SmallSlider";
 import AddToCart from "../popups/AddToCart";
 import { addToWishlist, viewWishlist, removeFromWishlist, isInWishlist } from "../functions/wishlistApi";
@@ -100,7 +100,7 @@ const ProductDetails = () => {
   }, [plantid]);
 
   if (!Plantdetailsview) {
-    return <div>Loading...</div>; // You can customize the loading state
+    return <div> <LoadingOutlined/> </div>; // You can customize the loading state
   }
 
   const handleAddToCart = () => {
