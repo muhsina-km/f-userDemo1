@@ -112,15 +112,14 @@ const ProductDetails = () => {
         message: 'Please Login first to add items to cart',
         placement: 'topLeft',
       });
-    } else if (Plantdetailsview.status !== 'AVAILABLE') {
+    } else if (Plantdetailsview.stock < '1') {
       // Plant is not available
       notification.open({
         type: 'error',
         message: 'This plant is out of stock now',
         placement: 'topLeft',
-      });
-    } else {
-      // Plant is available and user is logged in
+      }) } else {
+      // User is logged in
       notification.open({
         type: 'success',
         message: 'Added to Cart',
@@ -185,13 +184,11 @@ const ProductDetails = () => {
           </Tag>
           <br />
           <br />
+          <Text type="primary" strong>Available Stocks:</Text> <Text> {Plantdetailsview.stock}</Text>
+          {Plantdetailsview.stock < '1' && <p style={{color:'red',marginBottom:'-25px'}}>Out of Stock</p>}
+          <br />
+          <br />
           <Paragraph>Description: {Plantdetailsview.description}</Paragraph>
-
-          <Text type="primary" strong>Status:</Text><Text> {Plantdetailsview.status}</Text>
-          {Plantdetailsview.status !== 'AVAILABLE' && <p style={{ color: 'red', marginTop: '5px' }}>
-          <h4 style={{marginTop:'0px'}}> This plant is out of stock now. Please check back later or explore similar plants. </h4></p>}
-          {Plantdetailsview.status === 'AVAILABLE' && <p style={{ color: 'green', marginTop: '5px' }}>
-           <h4 style={{marginTop:'0px'}}> This plant is currently available. Feel free to add it to your cart or wishlist !</h4></p>}
           <br />
           <Space>
             <Button type="primary" shape="round" size={"medium"} onClick={handleBuyNow}>
