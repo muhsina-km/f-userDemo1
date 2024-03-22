@@ -3,7 +3,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 
 
-const AddToCart = ({ productId, onClose,addedToCart}) => {
+const AddToCart = ({ productId, onClose,addedToCart,Plantdetailsview}) => {
     const [value, setValue] = useState('1');
 
     const addToCart = async () => {
@@ -17,6 +17,16 @@ const AddToCart = ({ productId, onClose,addedToCart}) => {
           })
           return;
         }
+        if (Plantdetailsview.stock < 1 ) {
+          // Plant is not available
+          notification.open({
+            type: 'error',
+            message: 'This plant is out of stock now',
+            placement: 'topLeft',
+          }); 
+          return;
+        }
+
         try {
           const response = await axios.post('http://localhost:4005/cart/add-to-cart', {
             email,

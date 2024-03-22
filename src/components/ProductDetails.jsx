@@ -112,13 +112,14 @@ const ProductDetails = () => {
         message: 'Please Login first to add items to cart',
         placement: 'topLeft',
       });
-    } else if (Plantdetailsview.stock < '1') {
+    } else if (Plantdetailsview.stock < 1 ) {
       // Plant is not available
       notification.open({
         type: 'error',
         message: 'This plant is out of stock now',
         placement: 'topLeft',
-      }) } else {
+      }); 
+    } else {
       // User is logged in
       notification.open({
         type: 'success',
@@ -214,7 +215,8 @@ const ProductDetails = () => {
       <Modal
         footer={null}
         open={isModalVisible}
-      ><AddToCart productId={plantid} onClose={() => setIsModalVisible(false)} addedToCart={handleAddToCart} /></Modal>
+      ><AddToCart productId={plantid} onClose={() => setIsModalVisible(false)} 
+        addedToCart={handleAddToCart} Plantdetailsview={Plantdetailsview} /></Modal>
     </div>
   );
 };
