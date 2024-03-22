@@ -17,7 +17,9 @@ const ViewCart = () => {
     const [isPlaceOpen, setIsPlaceOpen] = useState(false)
     const [total, setCartTotal] = useState(0)
     const [animationCompleted, setAnimationCompleted] = useState(false);
-    const email = localStorage.getItem('user');
+    const user = localStorage.getItem('user');
+    const email = user ? JSON.parse(user).email : null;
+    
     const { Meta } = Card;
     useEffect(() => {
         window.scrollTo(0, 0);

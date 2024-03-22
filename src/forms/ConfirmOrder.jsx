@@ -7,7 +7,8 @@ const { Title, Text } = Typography;
 const ConfirmOrder = ({ formdata }) => {
     const [cart, setCart] = useState([]);
     const [total, setCartTotal] = useState(0);
-    const email = localStorage.getItem('user');
+    const user = localStorage.getItem('user');
+    const email = user ? JSON.parse(user).email : null;
 
     useEffect(() => {
         window.scrollTo(0, 0);

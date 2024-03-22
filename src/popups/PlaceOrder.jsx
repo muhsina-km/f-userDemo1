@@ -33,12 +33,6 @@ const PlaceOrder = ({ setOpened, cart }) => {
         axios.post('http://localhost:4005/order/place-order', formdata);
       console.log('Bakend Response:', response.data);
       if (response.status === 201) {
-        //clear cart after order placed
-        console.log("clearing cart...");
-        const clearCart =
-        await axios.post('http://localhost:4005/cart/clear-cart', { email });
-        console.log('clear cart:', clearCart.data);
-        //message.success("Order Placed Successfully");
         navigate('/home')
         notification.open({
           type: 'success',

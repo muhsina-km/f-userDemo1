@@ -7,7 +7,8 @@ const AddToCart = ({ productId, onClose,addedToCart}) => {
     const [value, setValue] = useState('1');
 
     const addToCart = async () => {
-        const email = localStorage.getItem('user');
+        const user = localStorage.getItem('user');
+        const email = user ? JSON.parse(user).email : null;
         if (!email) {
           notification.open({
             type: 'warning',  
