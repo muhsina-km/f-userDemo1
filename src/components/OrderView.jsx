@@ -119,8 +119,8 @@ const OrderView = () => {
                     <p>Price: ₹{item.price}</p>
                     <p>Quantity: {item.quantity}</p>
                     <Link to={`/view/${item.productId}`} onClick={handleLinkClick}>
-                      <Button type="primary" size='small' icon={<EyeOutlined />}>
-                        View Product
+                      <Button type="primary" size='small'>
+                      Product Details
                       </Button></Link>
                   </div>
                 </div>
